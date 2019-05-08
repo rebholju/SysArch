@@ -16,7 +16,6 @@
 </form>
 	<a href="signup.php">Sign up</a>
 
-Hallo
 </div>
 </body>
 
