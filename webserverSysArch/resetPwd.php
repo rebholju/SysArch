@@ -8,7 +8,7 @@
 <body>
 <div id="login">
 	<?php 
-	if(isset($_GET['resetcalled']))
+	if(!isset($_GET['resetpwdfromemail']))
 	{
 	$Message = resetpwdrequest() ?>
 <form action="?reset=1" method="post">
@@ -23,18 +23,19 @@ if(!empty($Message))
 }
 	}
 ?>
-</div>
+
 <?php
 if(isset($_GET['resetpwdfromemail']))
 {
-    $email = $_GET['email'];
-    $pwdresetMessage = resetpwd($email);?>
+    $pwdresetMessage = resetpwd();?>
     
-    <form action="?reset=1" method="post">
+    <form action="?reset=1&resetpwdfromemail=1" method="post">
+    <input type="email" name="email" placeholder="E-Mail"><br />
 	<input type="password" name="resetpwd" placeholder="Reset password"><br />
-	<input type="password" name="resetpwd" placeholder="New password"><br />
+	<input type="password" name="newpwd" placeholder="New password"><br />
 	<button type="submit" >Reset</button>
 </form>
+</div>
     <?php
     
     echo $pwdresetMessage;
