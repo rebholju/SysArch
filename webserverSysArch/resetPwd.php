@@ -35,10 +35,14 @@ if(isset($_GET['resetpwdfromemail']))
 	<input type="password" name="newpwd" placeholder="New password"><br />
 	<button type="submit" >Reset</button>
 </form>
-</div>
+
     <?php
     
     echo $pwdresetMessage;
 }
 
 ?>
+</div>
+</body>
+
+</html>

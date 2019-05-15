@@ -88,15 +88,36 @@ function resetpwdrequest()
         //Überprüfung des Passworts
         if ($user['resetpassword'] === $resetpwd) 
         {
-            $hashedPwd = password_hash($newpwd, PASSWORD_DEFAULT);
-            $statement = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
-            $result = $statement->execute(array($hashedPwd, $email));
-            if($result)
+
+            if(empty($newpwd))
             {
-               return'password resetted <br>
-                       <a href="index.php">Login</a> <br>';
+                return'enter a new password';
+            }
+            else 
+            {
+                //resetpassword hashen
+                $resetpwd = substr(md5(rand()),0,10);
+                $statement = $pdo->prepare("UPDATE users SET resetpassword = ? WHERE email = ?");
+                $result = $statement->execute(array($resetpwd, $email));
+                $hashedresetpwd = password_hash($resetpwd, PASSWORD_DEFAULT);
+                
+                //neues Password hashen
+                $hashedPwd = password_hash($newpwd, PASSWORD_DEFAULT);
+                $statement = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
+                $result = $statement->execute(array($hashedPwd, $email));
+                if($result)
+                {
+                   return'password resetted <br>
+                           <a href="index.php">Login</a> <br>';
+                }
+                else {
+                    return 'failure change password';
+                }
             }
             
+        }
+        else {
+            return 'Reset password wrong';
         }
 
 
