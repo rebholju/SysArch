@@ -86,7 +86,7 @@ function resetpwdrequest()
     else
     {
         //Überprüfung des Passworts
-        if ($user['resetpassword'] === $resetpwd) 
+        if (($user['resetpassword'] === $resetpwd) && !empty($resetpwd)) 
         {
 
             if(empty($newpwd))
@@ -96,10 +96,9 @@ function resetpwdrequest()
             else 
             {
                 //resetpassword hashen
-                $resetpwd = substr(md5(rand()),0,10);
+                $resetpwd = NULL;
                 $statement = $pdo->prepare("UPDATE users SET resetpassword = ? WHERE email = ?");
                 $result = $statement->execute(array($resetpwd, $email));
-                $hashedresetpwd = password_hash($resetpwd, PASSWORD_DEFAULT);
                 
                 //neues Password hashen
                 $hashedPwd = password_hash($newpwd, PASSWORD_DEFAULT);
