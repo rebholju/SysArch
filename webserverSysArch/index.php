@@ -3,7 +3,7 @@
 <head>
 	<title>Login</title>
 	<link href="stylesheet.css" rel="stylesheet">
-	<?php require_once('login.php')?>
+	<?php require_once('userhandler.php')?>
 </head>
 <body>
 <h1>Login</h1>
@@ -18,6 +18,7 @@
 if(!empty($errorMessage))
 {
     echo $errorMessage;
+    
 }
 ?>
 	<a href="signup.php">Sign up</a>

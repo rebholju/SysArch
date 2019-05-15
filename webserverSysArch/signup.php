@@ -55,11 +55,12 @@ if(isset($_GET['registerindB']))
             
                if(!$error)
                 {
+                   
                     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
                     
                     $statement = $pdo->prepare("INSERT INTO users(username, firstname, lastname, email, password)
                             VALUES(?, ?, ?, ?, ?)");
-                    $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd));
+                    $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd, $resetpwd));
                     
                     if($result)
                     {
