@@ -60,7 +60,7 @@ if(isset($_GET['registerindB']))
                     
                     $statement = $pdo->prepare("INSERT INTO users(username, firstname, lastname, email, password)
                             VALUES(?, ?, ?, ?, ?)");
-                    $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd, $resetpwd));
+                    $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd));
                     
                     if($result)
                     {

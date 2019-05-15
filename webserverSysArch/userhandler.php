@@ -27,13 +27,13 @@ if(isset($_GET['login']))
             die('Login erfolgreich. Weiter zu <a href="home.php">internen Bereich</a>');
         } else {
             return 'E-Mail/Benutzernamer oder Passwort ungueltig<br>
-                    <a href="resetPwd.php">Passwort zuruecksetzen</a> <br>';
+                    <a href="resetPwd.php?resetcalled=1>">Passwort zuruecksetzen</a> <br>';
         }
 }
 }
 
 //Reset Handler
-function resetpwd()
+function resetpwdrequest()
 {
     session_start();    //compare with cookie
     $pdo = new PDO('mysql:host=localhost; dbname=sysarch','root','');
@@ -58,13 +58,39 @@ function resetpwd()
             $result = $statement->execute(array($resetpwd, $email));
             
             
-            mail($email, 'Reset Password Project System Architecture', $resetpwd, "From: Absender <ju721reb@htwg-konstanz.de>");
+            mail($email, 'Reset Password Project System Architecture', 'Gehe zu diesem link<?php>$resetpwd<php>', "From: Absender <ju721reb@htwg-konstanz.de>");
             return'ResetPassword sent!!';
             
         }
     }
     
 }
+
+// function reset($email)
+// {       
+
+//     $statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+//     $result = $statement->execute(array('email' => $email));
+//     $user = $statement->fetch();
+
+//     if($user === false)
+//     { 
+//     return'E-Mail does not exist !!!';
+//     }
+//     else
+//     {
+    
+//     $resetpwd = substr(md5(rand()),0,10);
+//     $statement = $pdo->prepare("UPDATE users SET resetpassword = ? WHERE email = ?");
+//     $result = $statement->execute(array($resetpwd, $email));
+    
+    
+//     mail($email, 'Reset Password Project System Architecture', 'Gehe zu diesem link<?php>$resetpwd<php>', "From: Absender <ju721reb@htwg-konstanz.de>");
+//     return'ResetPassword sent!!';
+        
+//     }
+    
+// }
 ?>
 
 
