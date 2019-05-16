@@ -54,8 +54,9 @@ function resetpwdrequest()
         {
             
             $resetpwd = substr(md5(rand()),0,10);
+            $hashedresetpwd = password_hash($resetpwd, PASSWORD_DEFAULT);
             $statement = $pdo->prepare("UPDATE users SET resetpassword = ? WHERE email = ?");
-            $result = $statement->execute(array($resetpwd, $email));
+            $result = $statement->execute(array($hashedresetpwd, $email));
             mail($email, 'Reset Password Project System Architecture',
                 "Your Reset password:" .$resetpwd."
                  go to this link: http://localhost/SysArch/webserverSysArch/resetPwd.php?resetpwdfromemail=1", "From: SysArch Projekt");
@@ -86,7 +87,7 @@ function resetpwdrequest()
     else
     {
         //Überprüfung des Passworts
-        if (($user['resetpassword'] === $resetpwd) && !empty($resetpwd)) 
+        if($user !== false && password_verify($resetpwd, $user['resetpassword'])) 
         {
 
             if(empty($newpwd))
@@ -95,12 +96,11 @@ function resetpwdrequest()
             }
             else 
             {
-                //resetpassword hashen
+                
                 $resetpwd = NULL;
                 $statement = $pdo->prepare("UPDATE users SET resetpassword = ? WHERE email = ?");
                 $result = $statement->execute(array($resetpwd, $email));
                 
-                //neues Password hashen
                 $hashedPwd = password_hash($newpwd, PASSWORD_DEFAULT);
                 $statement = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
                 $result = $statement->execute(array($hashedPwd, $email));
@@ -124,6 +124,26 @@ function resetpwdrequest()
     }
     
  }
+ }
+ 
+ 
+ //function logout
+ function logout()
+ {
+     if(isset($_GET['logout']))
+     {
+         $pdo = new PDO('mysql:host=localhost; dbname=sysarch','root','');
+       
+         
+         $statement = $pdo->prepare("UPDATE users SET lastlogin = ? WHERE idUsers = ?");
+         $result = $statement->execute(array(date('Y-m-d H:i:s'),$_SESSION['userid']));
+         
+         unset($_SESSION['userid']);
+         echo ' you are logged out <br>';
+          header("Location: http://localhost/SysArch/webserverSysArch/index.php");
+         exit();
+         
+     }
  }
 ?>
 
