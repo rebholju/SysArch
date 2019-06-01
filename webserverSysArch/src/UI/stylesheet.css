@@ -1,0 +1,122 @@
+h1{
+	font-size: 2em;
+	text-align: center;
+	font-family:Arial;
+}
+#loginfalse{
+	font-size: 1em;
+	text-align: center;
+	color: red;
+	text-decoration:none;	
+}
+
+#signupsucess{
+	
+	font-size: 1em;
+	text-align: center;
+	color: green;
+	text-decoration:none;	
+	
+}
+
+#login{
+	
+	text-align: center;
+	line-height: 2; 
+	
+}
+
+
+body{
+  margin:0px;
+  font-family:arial;
+}
+#head {
+  background-color:#192a56;
+  height: 50px;
+}
+#title{
+  color:grey;
+  font-size: 250%;
+  font-weight:bold;
+  margin-left:10px;  
+}
+#loggedinas{
+
+  color:grey;
+  font-size: 250%;
+  position: absolute;
+  right:3.5em;
+  top: 5px; 
+}
+
+.buttondesign
+{
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #192a56;
+  font-size: 18px;
+  font-weight:bold;
+  border-radius:8px;
+  background-color:grey;
+}
+
+.buttondesign:hover{
+    background-color: grey;
+  color: white;
+}
+
+.buttondesign:active{
+    background-color: grey;
+  color: #192a56;
+}
+
+
+
+#head button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #192a56;
+  padding: 10px 30px;
+  position: absolute;
+  right:1em;
+  top: 5px;
+  font-size: 18px;
+  font-weight:bold;
+  border-radius:8px;
+  background-color:grey;
+  
+}
+
+
+#head button:hover{
+    background-color: grey;
+  color: white;
+}
+#head button:active{
+    background-color: grey;
+  color: #192a56;
+}
+
+#nav a {
+  width: 20%;
+  diplay:inline-block;
+  float:left;
+  text-align:center;
+  text-decoration:none;
+  color:#192a56;
+  height:30px
+}
+#nav a:hover{
+  background-color:lightgrey;
+}
+
+#orange{
+    border-top:solid 5px orange;
+}
+
+#green{
+    border-top:solid 5px green;
+}
