@@ -1,31 +1,153 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-	<link href="stylesheet.css" rel="stylesheet">
-	<?php require_once('userhandler.php')?>
-</head>
-<body>
-<h1>Login</h1>
-<div id="login">
-	<?php $errorMessage = login() ?>
-<form action="?login=1" method="post">
-	<input type="text" name="uid" placeholder="username/e-mail"><br />
-	<input type="password" name="pwd" placeholder="password"><br />
-	<button type="submit" >Login</button>
-</form>
-<?php 
-if(!empty($errorMessage))
-{
-    echo $errorMessage;
-    
-}
-?>
-	<a href="signup.php">Sign up</a>
+
+	<?php 
+	require_once('src/DataLogic/UserClass.php');
+	//require_once('src/DataLogic/resetPwd.php');
+	require_once('src/DataLogic/dataBaseController.php');
+	require_once('src/DataLogic/CommandInterpreter.php');
+	require_once('src/DataLogic/MessageHandler.php');
+	
+	//View
+	require_once('src/UI/View.php');
+	require_once('src/UI/LoginView.php');
+	require_once('src/UI/HomeView.php');
+	require_once('src/UI/SignupView.php');
+	require_once('src/UI/ResetPwdView.php');
+	require_once('src/UI/ResetPwdFromEmailView.php');
+	
+	
+	
+	
+	main();
+	
+	function main()
+	{
+	    session_start();
+	    
+	    
+	    if (isset($_SESSION['softwareName']))
+	    {
+	    
+	        if ($_SESSION['softwareName'] != 'SysArchWeb')
+	        {
+	            
+	            logout();
+	        }
+	    }
+	    else
+	    {
+	        // also die app setzen auf HANS
+	        $_SESSION['softwareName'] = 'SysArchWeb';
+	    }
 
 
-</div>
-</body>
+	    if(!isset($_GET['command']))
+	    {
+	        logout();
+	    
+	    }
+	    else {
+	    $command = $_GET['command'];
+	    
+	    if($command=="login")
+	    {
+	        login();
+	    
+	    }
+	    else if($command == "logout")
+	    {
+            logout();
+	    }
+	    else if($command == "SignupView"|| $command == "Signup")
+	    {
+	       signup($command);
+	        
+	    }
+	    else if($command == "resetpwdView" || $command == "resetpwd" || $command == "resetpwdfromemailView" || $command == "resetpwdfromemail")
+	    {
+	        resetpwd2($command);
+	    }
+	    
+	    else if(isset($_SESSION['username']))
+	    {
+	        $Interpreter = new CommandInterpreter();
+	        $Interpreter->analyseCommand($command);
+	    }
+	    }
+	}
+	
+	
+	
+	
+	
+	function login()
+	{
+	    $pdo = new DataBaseController();
+	    $result=$pdo->login();
+	    if($result==false)
+	    {
+	        logout();
+	    }
+	    
+	}
+	function signup($command)
+	{
 
-</html>
+
+	    
+	    if($command == "Signup")
+	    {
+	        $pdo = new DataBaseController();
+	        $pdo->signup();
+	        
+	    }
+	    $view = new SignupView(TRUE);
+	    $view->generatePage();
+	}
+	
+	function logout()
+	{
+	    $userclass = new UserClass();
+	    $userclass->UserLogout();
+	    $view = new LoginView(TRUE);
+	    $view->generatePage();
+	}
+	
+	function resetpwd2($command)
+	{
+	    if($command == "resetpwdView" || $command == "resetpwd")
+	    {
+
+	    	    
+        if($command == "resetpwd")
+	    {
+	        $pdo = new DataBaseController();
+	        $pdo->resetpwdrequest();
+	        
+	    }
+	    $view = new ResetPwdView(TRUE);
+	    $view->generatePage();
+	    }
+
+	    if($command == "resetpwdfromemailView" || $command == "resetpwdfromemail")
+	    {
+	     if($command == "resetpwdfromemail")
+	     {
+	         $pdo = new DataBaseController();
+	         $pdo->resetpwd();
+
+	     }
+	     $view = new ResetPwdFromEmailView();
+	     $view->generatePage();
+	    }
+
+	    
+
+	    }
+	        
+	
+	
+	
+	   ?>
+
+
 
