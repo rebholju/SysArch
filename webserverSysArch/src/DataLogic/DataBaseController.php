@@ -168,7 +168,7 @@ $this->pdo = new PDO('mysql:host=localhost; dbname=sysarch','root','');
                         $result = $statement->execute(array($hashedPwd, $email));
                         if($result)
                         {
-                            $answer .= '<div id="#signupsucess">password resetted <br><div/>
+                            $answer .= '<div id="signupsucess">password resetted <br><div/>
                             <div>
                             <form action="?command=logout" method="post">
                             <button type="submit" class="buttondesign" >Home</button>
