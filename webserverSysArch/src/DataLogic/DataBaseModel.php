@@ -1,10 +1,10 @@
 <?php
-class DataBaseController
+class DataBaseModel
 {
     public $pdo;
   public function __construct()
     {
-$this->pdo = new PDO('mysql:host=localhost; dbname=sysarch','root','');
+$this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
     }
     
     public function login()

@@ -13,7 +13,7 @@
 	    
 	    function UserLogout()
 	    {
-            $pdo = new DataBaseController();
+            $pdo = new DataBaseModel();
             $pdo->logout();
 	    }
 	    }
