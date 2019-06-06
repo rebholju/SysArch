@@ -12,8 +12,10 @@ echo'
     </a>
   <form action="?command=logout" method="post">
   <button type="submit" >logout</button>
+</div>
 <div id="nav">
-  <a id="orange" href="home.php">Home</a>
+  <button type="submit" >Home</button>
+<a id="orange" href="index.php">Home</a>
   <a id="green" href="index.php">Historical Data</a>
     </div>';
         echo "<br>";

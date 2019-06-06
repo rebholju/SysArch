@@ -120,3 +120,7 @@ body{
 #green{
     border-top:solid 5px green;
 }
+#yellow
+{
+	border-top:solid 5px red;
+}

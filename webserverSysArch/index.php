@@ -2,7 +2,7 @@
 	<?php 
 	require_once('src/DataLogic/UserClass.php');
 	//require_once('src/DataLogic/resetPwd.php');
-	require_once('src/DataLogic/dataBaseController.php');
+	require_once('src/DataLogic/DataBaseModel.php');
 	require_once('src/DataLogic/CommandInterpreter.php');
 	require_once('src/DataLogic/MessageHandler.php');
 	
@@ -81,7 +81,7 @@
 	
 	function login()
 	{
-	    $pdo = new DataBaseController();
+	    $pdo = new DataBaseModel();
 	    $result=$pdo->login();
 	    if($result==false)
 	    {
@@ -96,7 +96,7 @@
 	    
 	    if($command == "Signup")
 	    {
-	        $pdo = new DataBaseController();
+	        $pdo = new DataBaseModel();
 	        $pdo->signup();
 	        
 	    }
@@ -120,7 +120,7 @@
 	    	    
         if($command == "resetpwd")
 	    {
-	        $pdo = new DataBaseController();
+	        $pdo = new DataBaseModel();
 	        $pdo->resetpwdrequest();
 	        
 	    }
@@ -132,7 +132,7 @@
 	    {
 	     if($command == "resetpwdfromemail")
 	     {
-	         $pdo = new DataBaseController();
+	         $pdo = new DataBaseModel();
 	         $pdo->resetpwd();
 
 	     }
