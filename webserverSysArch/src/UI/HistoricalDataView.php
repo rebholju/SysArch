@@ -1,10 +1,10 @@
 <?php
 
-class HomeView extends View
+class HistoricalDataView extends View
 {
-    
     protected function generateContent()
     {
+        
         $username = $_SESSION['username'];
         echo '<a id="loggedinas">' ?><?php echo $username;?><?php ;
         
@@ -23,12 +23,10 @@ echo'
 <a id="green" href="index.php?command=ActualDataView">ActualData</a>
 <a id="blue" href="index.php?command=SignupView">AddUser</a>
   </div>
-
    </div>';
-        echo "<br>";
-        
-        
-        
+  echo "<br>";
+    
     }
+    
 }
 ?>

@@ -4,11 +4,28 @@ class CommandInterpreter
     
     public function analyseCommand($command)
     {
-        if($command=="HistoricalData")
+        if($command=="HistoricalDataView")
         {
-            $view = new HomeView();
+            $view=new HistoricalDataView();
             $view->generatePage();
-            echo "test";
+        }
+        
+        if($command=="ActualDataView")
+        {
+            $view=new ActualDataView();
+            $view->generatePage();
+        }
+        if($command=="HomeView")
+        {
+            $view=new HomeView();
+            $view->generatePage();
+        }
+        
+        if($command=="SignupView")
+        {
+            $view=new SignupView();
+            $view->generatePage();
+            
         }
     }
     

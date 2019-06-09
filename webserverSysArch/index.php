@@ -14,15 +14,17 @@
 	require_once('src/UI/SignupView.php');
 	require_once('src/UI/ResetPwdView.php');
 	require_once('src/UI/ResetPwdFromEmailView.php');
+	require_once('src/UI/HistoricalDataView.php');
+	require_once('src/UI/ActualDataView.php');
 	
 	
 	
- 	$test = new VehicleDataModel();
- 	$test->SetSensorData('noch kein file', 1);
- 	echo 'current Data';
- 	$test->getCurrentSensorData(1);
- 	echo 'historical Data';
- 	$test->getHistoricalSensorData(1);
+//  	$test = new VehicleDataModel();
+//  	$test->SetSensorData('noch kein file', 1);
+//  	echo 'current Data';
+//  	$test->getCurrentSensorData(1);
+//  	echo 'historical Data';
+//  	$test->getHistoricalSensorData(1);
 	main();
 	
 	function main()
