@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 09. Jun 2019 um 08:56
+-- Erstellungszeit: 09. Jun 2019 um 10:17
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.3.4
 
@@ -36,17 +36,18 @@ CREATE TABLE `users` (
   `email` tinytext NOT NULL,
   `password` longtext NOT NULL,
   `lastlogin` datetime NOT NULL,
-  `resetpassword` longtext NOT NULL
+  `resetpassword` longtext NOT NULL,
+  `rfidID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`idUsers`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`) VALUES
-(14, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$GLP7r3wRuh0VRRa7Ssfsfehr0/.qmHMGGbiYy3xZAVWShI7G1SLOK', '2019-06-06 17:30:43', ''),
-(15, 'ju721reb', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$d/l5q2XIHP1CsMkDxdslJOpPiTUZg262xavYqME1G9sR.UYM75oqW', '2019-06-03 09:19:00', ''),
-(16, 'test', 'Julian', 'sagfa', 'rebholju@googlemail.com', '$2y$10$pxUTNCxCvLyukqVj7Fqwme4c6yGkRQkNtrNZdlj6BFQlakVxbIGoy', '0000-00-00 00:00:00', '');
+INSERT INTO `users` (`idUsers`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`, `rfidID`) VALUES
+(14, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$GLP7r3wRuh0VRRa7Ssfsfehr0/.qmHMGGbiYy3xZAVWShI7G1SLOK', '2019-06-06 17:30:43', '', 12345),
+(15, 'ju721reb', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$d/l5q2XIHP1CsMkDxdslJOpPiTUZg262xavYqME1G9sR.UYM75oqW', '2019-06-03 09:19:00', '', 0),
+(16, 'test', 'Julian', 'sagfa', 'rebholju@googlemail.com', '$2y$10$pxUTNCxCvLyukqVj7Fqwme4c6yGkRQkNtrNZdlj6BFQlakVxbIGoy', '0000-00-00 00:00:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -58,20 +59,21 @@ CREATE TABLE `vehiclecurrentdata` (
   `vehicleNumber` int(11) NOT NULL,
   `sensor` tinytext NOT NULL,
   `value` varchar(20) NOT NULL,
-  `timeStamp` datetime NOT NULL
+  `timeStamp` datetime NOT NULL,
+  `driver` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `vehiclecurrentdata`
 --
 
-INSERT INTO `vehiclecurrentdata` (`vehicleNumber`, `sensor`, `value`, `timeStamp`) VALUES
-(1, 'CPUTemp', '12', '2019-06-08 17:00:12'),
-(1, 'jitter', '8', '2019-06-08 17:00:12'),
-(1, 'numOfRTThreads', 'eins', '2019-06-08 17:00:12'),
-(1, 'LIDAR', '190', '2019-06-08 17:00:12'),
-(1, 'Speed', '22', '2019-06-08 17:00:12'),
-(1, 'BatteryPower', '11', '2019-06-08 17:00:12');
+INSERT INTO `vehiclecurrentdata` (`vehicleNumber`, `sensor`, `value`, `timeStamp`, `driver`) VALUES
+(1, 'CPUTemp', '12', '2019-06-08 17:00:12', 'rebholju'),
+(1, 'jitter', '8', '2019-06-08 17:00:12', 'rebholju'),
+(1, 'numOfRTThreads', 'eins', '2019-06-08 17:00:12', 'rebholju'),
+(1, 'LIDAR', '190', '2019-06-08 17:00:12', 'rebholju'),
+(1, 'Speed', '22', '2019-06-08 17:00:12', 'rebholju'),
+(1, 'BatteryPower', '11', '2019-06-08 17:00:12', 'rebholju');
 
 -- --------------------------------------------------------
 
@@ -83,26 +85,27 @@ CREATE TABLE `vehiclehistoricaldata` (
   `vehicleNumber` int(11) NOT NULL,
   `sensor` tinytext NOT NULL,
   `value` float NOT NULL,
-  `timeStamp` datetime NOT NULL
+  `timeStamp` datetime NOT NULL,
+  `driver` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `vehiclehistoricaldata`
 --
 
-INSERT INTO `vehiclehistoricaldata` (`vehicleNumber`, `sensor`, `value`, `timeStamp`) VALUES
-(1, 'CPUTemp', 12, '2019-06-08 17:00:09'),
-(1, 'jitter', 8, '2019-06-08 17:00:09'),
-(1, 'numOfRTThreads', 0, '2019-06-08 17:00:09'),
-(1, 'LIDAR', 190, '2019-06-08 17:00:09'),
-(1, 'Speed', 22, '2019-06-08 17:00:09'),
-(1, 'BatteryPower', 11, '2019-06-08 17:00:09'),
-(1, 'CPUTemp', 12, '2019-06-08 17:00:12'),
-(1, 'jitter', 8, '2019-06-08 17:00:12'),
-(1, 'numOfRTThreads', 0, '2019-06-08 17:00:12'),
-(1, 'LIDAR', 190, '2019-06-08 17:00:12'),
-(1, 'Speed', 22, '2019-06-08 17:00:12'),
-(1, 'BatteryPower', 11, '2019-06-08 17:00:12');
+INSERT INTO `vehiclehistoricaldata` (`vehicleNumber`, `sensor`, `value`, `timeStamp`, `driver`) VALUES
+(1, 'CPUTemp', 12, '2019-06-08 17:00:09', 'rebholju'),
+(1, 'jitter', 8, '2019-06-08 17:00:09', 'rebholju'),
+(1, 'numOfRTThreads', 0, '2019-06-08 17:00:09', 'rebholju'),
+(1, 'LIDAR', 190, '2019-06-08 17:00:09', 'rebholju'),
+(1, 'Speed', 22, '2019-06-08 17:00:09', 'rebholju'),
+(1, 'BatteryPower', 11, '2019-06-08 17:00:09', 'rebholju'),
+(1, 'CPUTemp', 12, '2019-06-08 17:00:12', 'rebholju'),
+(1, 'jitter', 8, '2019-06-08 17:00:12', 'rebholju'),
+(1, 'numOfRTThreads', 0, '2019-06-08 17:00:12', 'rebholju'),
+(1, 'LIDAR', 190, '2019-06-08 17:00:12', 'rebholju'),
+(1, 'Speed', 22, '2019-06-08 17:00:12', 'rebholju'),
+(1, 'BatteryPower', 11, '2019-06-08 17:00:12', 'rebholju');
 
 --
 -- Indizes der exportierten Tabellen
