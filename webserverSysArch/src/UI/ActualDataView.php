@@ -4,7 +4,6 @@ class ActualDataView extends View
 {
     protected function generateContent()
     {
-        
         $username = $_SESSION['username'];
         echo '<a id="loggedinas">' ?><?php echo $username;?><?php ;
         
@@ -39,7 +38,7 @@ echo'
   </tr>
   <tr>
     <td>88</td>
-    <td>lidar</td>
+    <td><$data[2]['timeStamp']</td>
     <td>54</td>
   </tr>
   <tr>
