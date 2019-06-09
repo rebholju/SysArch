@@ -167,10 +167,13 @@ class VehicleDataModel
     
     public function getCurrentSensorData($vehicleNumber)
     {
+        // $username = $_SESSION['username'];
+        $username = 'rebholju'; // nur vorübergehend
+        
         $answer = "";
         $data = array();
-        $statement = $this->pdo->prepare("SELECT * FROM  vehiclecurrentdata WHERE vehicleNumber = ?");
-        $result = $statement->execute(array( $vehicleNumber ));
+        $statement = $this->pdo->prepare("SELECT * FROM  vehiclecurrentdata WHERE vehicleNumber = ? AND driver = ?");
+        $result = $statement->execute(array( $vehicleNumber, $username ));
         while ($row = $statement->fetch()) {
             $data[] = $row;
             
@@ -201,19 +204,22 @@ class VehicleDataModel
             $Message = MessageHandler::getInstance();
             $Message->AddMessage($answer);
         }
-        
+        return $data;
            
     }
     
     public function getHistoricalSensorData($vehicleNumber)
     {
+        // $username = $_SESSION['username'];
+        $username = 'rebholju'; // nur vorübergehend
+        
         $counter = 0;
         $answer = "";
         $data = array();
         
         
-        $statement = $this->pdo->prepare("SELECT * FROM  vehiclehistoricaldata WHERE vehicleNumber = ?");
-        $result = $statement->execute(array( $vehicleNumber ));
+        $statement = $this->pdo->prepare("SELECT * FROM  vehiclehistoricaldata WHERE vehicleNumber = ? AND driver = ?");
+        $result = $statement->execute(array( $vehicleNumber, $username ));
         while ($row = $statement->fetch()) {
             $data[] = $row;
             $counter++;
@@ -275,6 +281,8 @@ class VehicleDataModel
             $answer.= $result;
         }
         
+        
     }
+
 }
 ?>
