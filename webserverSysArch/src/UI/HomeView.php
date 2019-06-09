@@ -14,9 +14,8 @@ echo'
   <button type="submit" >logout</button>
 </div>
 <div id="nav">
-  <button type="submit" >Home</button>
-<a id="orange" href="index.php">Home</a>
-  <a id="green" href="index.php">Historical Data</a>
+<a id="orange" href="index.php?command=HomeView">Home</a>
+  <a id="green" href="index.php?command=HistoricalData">Historical Data</a>
     </div>';
         echo "<br>";
         

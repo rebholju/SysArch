@@ -2,9 +2,10 @@
 	<?php 
 	require_once('src/DataLogic/UserClass.php');
 	//require_once('src/DataLogic/resetPwd.php');
-	require_once('src/DataLogic/DataBaseModel.php');
+	require_once('src/DataLogic/UserDataModel.php');
 	require_once('src/DataLogic/CommandInterpreter.php');
 	require_once('src/DataLogic/MessageHandler.php');
+	require_once('src/DataLogic/VehicleDataModel.php');
 	
 	//View
 	require_once('src/UI/View.php');
@@ -16,14 +17,18 @@
 	
 	
 	
-	
+ 	$test = new VehicleDataModel();
+ 	$test->SetSensorData('noch kein file', 1);
+ 	echo 'current Data';
+ 	$test->getCurrentSensorData(1);
+ 	echo 'historical Data';
+ 	$test->getHistoricalSensorData(1);
 	main();
 	
 	function main()
 	{
 	    session_start();
-	    
-	    
+
 	    if (isset($_SESSION['softwareName']))
 	    {
 	    
@@ -81,7 +86,7 @@
 	
 	function login()
 	{
-	    $pdo = new DataBaseModel();
+	    $pdo = new UserDataModel();
 	    $result=$pdo->login();
 	    if($result==false)
 	    {
@@ -96,7 +101,7 @@
 	    
 	    if($command == "Signup")
 	    {
-	        $pdo = new DataBaseModel();
+	        $pdo = new UserDataModel();
 	        $pdo->signup();
 	        
 	    }
@@ -120,7 +125,7 @@
 	    	    
         if($command == "resetpwd")
 	    {
-	        $pdo = new DataBaseModel();
+	        $pdo = new UserDataModel();
 	        $pdo->resetpwdrequest();
 	        
 	    }
@@ -132,7 +137,7 @@
 	    {
 	     if($command == "resetpwdfromemail")
 	     {
-	         $pdo = new DataBaseModel();
+	         $pdo = new UserDataModel();
 	         $pdo->resetpwd();
 
 	     }

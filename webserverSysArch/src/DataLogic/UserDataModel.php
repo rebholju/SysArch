@@ -1,10 +1,11 @@
 <?php
-class DataBaseModel
+class UserDataModel
 {
-    public $pdo;
+    private $pdo;
   public function __construct()
     {
-$this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
+        // Hier Datenbank adresse eintragen auf ea-pc165
+        $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
     }
     
     public function login()

@@ -1,0 +1,16 @@
+ {
+        "CPU": {
+				"CPUTemp": 12,
+				"CPUload": 69
+				},
+		
+        "RT": 	{
+				"jitter": "8",
+				"numOfRTThreads" : "eins"
+				},
+	"Sensors": 	{
+				"LIDAR":190,
+				"BatteryPower": "11",
+				"Speed" : "22"
+				}
+}
