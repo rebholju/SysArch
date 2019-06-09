@@ -12,6 +12,7 @@ class SignupView extends View
         <input type="text" name="firstname" placeholder="Firstname"><br />
         <input type="text" name="lastname" placeholder="Lastname"><br />
         <input type="email" name="email" placeholder="E-Mail"><br />
+        <input type="text" name="RFID" placeholder="RFID-NR"><br />
         <input type="text" name="username" placeholder="Username"><br />
         <input type="password" name="pwd" placeholder="password"><br />
         <button type="submit" name="submit" class="buttondesign">Sign in</button>

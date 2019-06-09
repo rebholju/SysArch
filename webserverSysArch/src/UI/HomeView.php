@@ -23,6 +23,19 @@ echo'
 <a id="green" href="index.php?command=ActualDataView">ActualData</a>
 <a id="blue" href="index.php?command=SignupView">AddUser</a>
   </div>
+<br></br>
+
+
+     
+    <h1>Welcome User: '.$username.'</h1> 
+
+  <div class="center">
+Always a good ride :) 
+</div>   
+        </div>
+        
+        
+        </body>
 
    </div>';
         echo "<br>";
