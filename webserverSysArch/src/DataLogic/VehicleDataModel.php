@@ -10,12 +10,15 @@ class VehicleDataModel
     }
    
     //sets the Values given in the JSON file into the current DB and historical DB
-    public function SetSensorData($JSON, $vehicleNumber)
+    public function setSensorData($JSON, $vehicleNumber)
     {
         
         $answer = "";
         $JSON = file_get_contents("example_2.json");
         $data = json_decode($JSON, true);
+        
+        // $username = $_SESSION['username'];
+        $username = 'rebholju'; // nur vorübergehend
         
         $CPUTemp = $data['CPU']['CPUTemp'];
 
@@ -30,8 +33,8 @@ class VehicleDataModel
         $BatteryPower = $data['Sensors']['BatteryPower'];
 
                             //update data
-                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-                            $result = $statement->execute(array($CPUTemp, date('Y-m-d H:i:s'), $vehicleNumber, "CPUTemp"));
+                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ? AND driver = ?");
+                            $result = $statement->execute(array($CPUTemp, date('Y-m-d H:i:s'), $vehicleNumber, "CPUTemp", $username));
 
                             if(!$result)
                                 {
@@ -40,8 +43,8 @@ class VehicleDataModel
                                 }
 
                             //jitter
-                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-                                $result = $statement->execute(array( $jitter, date('Y-m-d H:i:s'), $vehicleNumber, "jitter" ));
+                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ? AND driver = ?");
+                                $result = $statement->execute(array( $jitter, date('Y-m-d H:i:s'), $vehicleNumber, "jitter", $username ));
 
                             if(!$result)
                                 {
@@ -49,8 +52,8 @@ class VehicleDataModel
                                 }
 
                             //numOfRTThreads
-                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-                            $result = $statement->execute(array( $numOfRTThreads, date('Y-m-d H:i:s'), $vehicleNumber, "numOfRTThreads" ));
+                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ? AND driver = ?");
+                                $result = $statement->execute(array( $numOfRTThreads, date('Y-m-d H:i:s'), $vehicleNumber, "numOfRTThreads", $username ));
 
                             if(!$result)
                                 {
@@ -58,8 +61,8 @@ class VehicleDataModel
                                 }
 
                             //LIDAR
-                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-                            $result = $statement->execute(array( $LIDAR, date('Y-m-d H:i:s'), $vehicleNumber, "LIDAR" ));
+                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ? AND driver = ?");
+                                $result = $statement->execute(array( $LIDAR, date('Y-m-d H:i:s'), $vehicleNumber, "LIDAR", $username ));
 
                             if(!$result)
                                 {
@@ -67,8 +70,8 @@ class VehicleDataModel
                                 }
 
                             //Speed
-                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-                            $result = $statement->execute(array( $Speed, date('Y-m-d H:i:s'), $vehicleNumber, "Speed" ));
+                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ? AND driver = ?");
+                                $result = $statement->execute(array( $Speed, date('Y-m-d H:i:s'), $vehicleNumber, "Speed", $username ));
 
                             if(!$result)
                                 {
@@ -76,8 +79,8 @@ class VehicleDataModel
                                 }
 
                             //BatteryPower
-                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-                            $result = $statement->execute(array(  $BatteryPower, date('Y-m-d H:i:s'), $vehicleNumber, "BatteryPower" ));
+                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ? AND driver = ?");
+                                $result = $statement->execute(array(  $BatteryPower, date('Y-m-d H:i:s'), $vehicleNumber, "BatteryPower", $username ));
 
                             if(!$result)
                                 {
@@ -87,9 +90,9 @@ class VehicleDataModel
                                 
                                 // store historical
                                 
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp)
-                                                            VALUES(?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "CPUTemp", $CPUTemp, date('Y-m-d H:i:s') ));
+                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
+                                                            VALUES(?, ?, ?, ?, ?)");
+                                                            $result = $statement->execute(array( $vehicleNumber, "CPUTemp", $CPUTemp, date('Y-m-d H:i:s'), $username ));
                                 
                                                             if(!$result)
                                                                 {
@@ -98,9 +101,9 @@ class VehicleDataModel
                                                                 }
                                 
                                                             //jitter
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp)
-                                                            VALUES(?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "jitter", $jitter, date('Y-m-d H:i:s') ));
+                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+                                                            VALUES(?, ?, ?, ?, ?)");
+                                                            $result = $statement->execute(array( $vehicleNumber, "jitter", $jitter, date('Y-m-d H:i:s'), $username ));
                                 
                                                             if(!$result)
                                                                 {
@@ -108,9 +111,9 @@ class VehicleDataModel
                                                                 }
                                 
                                                             //numOfRTThreads
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp)
-                                                            VALUES(?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "numOfRTThreads", $numOfRTThreads, date('Y-m-d H:i:s') ));
+                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+                                                            VALUES(?, ?, ?, ?, ?)");
+                                                            $result = $statement->execute(array( $vehicleNumber, "numOfRTThreads", $numOfRTThreads, date('Y-m-d H:i:s'), $username ));
                                 
                                                             if(!$result)
                                                                 {
@@ -118,9 +121,9 @@ class VehicleDataModel
                                                                 }
                                 
                                                             //LIDAR
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp)
+                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
                                                             VALUES(?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "LIDAR", $LIDAR, date('Y-m-d H:i:s') ));
+                                                            $result = $statement->execute(array( $vehicleNumber, "LIDAR", $LIDAR, date('Y-m-d H:i:s'), $username ));
                                 
                                                             if(!$result)
                                                                 {
@@ -248,10 +251,30 @@ class VehicleDataModel
         
         
     }
-            
         
+    public function setCurrentDriver($vehicleNumber)
+    {
+        // $username = $_SESSION['username'];
+        $username = 'rebholju'; // nur vorübergehend
+        
+        
+        
+    }
     
-    
-    
+    public function getCurrentDriver()
+    {
+        // $username = $_SESSION['username'];
+        $username = 'rebholju'; // nur vorübergehend
+        
+        $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
+        $result = $statement->execute(array($CPUTemp, date('Y-m-d H:i:s'), $vehicleNumber, "CPUTemp"));
+        
+        if(!$result)
+        {
+            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+            $answer.= $result;
+        }
+        
+    }
 }
 ?>

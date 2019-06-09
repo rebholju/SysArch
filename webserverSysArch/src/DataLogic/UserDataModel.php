@@ -8,13 +8,8 @@ class UserDataModel
         $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
     }
     
-    public function login()
+    public function login($username,$password)
     {	 
-
-        if(isset($_GET['command']))
-        {
-        $username_email = $_POST['uid'];
-        $password = $_POST['pwd'];
         
         $statement = $this->pdo->prepare("SELECT * FROM users WHERE username = :username");
         $result = $statement->execute(array('username' => $username_email));
@@ -44,10 +39,11 @@ class UserDataModel
             return false;
         }
         
-        }
+        
     
         
     }
+    
     public function logout()
     {
     if(isset($_GET['command'])=="logout")
@@ -62,20 +58,11 @@ class UserDataModel
     }
     }
     
-    public function signup()
+    public function signup($firstname,$lastname,$email,$username,$pwd,$rfidID)
     {
         $answer ='';
-        if(isset($_GET['command']))
-        {
-            $error = false;
-            $firstname = $_POST['firstname'];
-            $email = $_POST['email'];
-            $lastname = $_POST['lastname'];
             
-            $username = $_POST['username'];
-            $pwd = $_POST['pwd'];
-            
-            if(empty($firstname)||empty($lastname)||empty($email)||empty($username)||empty($pwd))
+            if(empty($firstname)||empty($lastname)||empty($email)||empty($username)||empty($pwd)||empty($rfidID))
             {
                 $answer .= '<div id="loginfalse">Formular nicht komplett ausgefuellt<br>';
                 $error = true;
@@ -106,9 +93,9 @@ class UserDataModel
                         
                         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
                         
-                        $statement = $this->pdo->prepare("INSERT INTO users(username, firstname, lastname, email, password)
+                        $statement = $this->pdo->prepare("INSERT INTO users(username, firstname, lastname, email, password, rfidID)
                             VALUES(?, ?, ?, ?, ?)");
-                        $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd));
+                        $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd, $rfidID));
                         
                         if($result)
                         {
@@ -121,7 +108,7 @@ class UserDataModel
                     }
                 }
             }
-        }
+        
         
         if(!empty($answer))
         {
@@ -131,13 +118,13 @@ class UserDataModel
         }
     }
         
-    public function resetpwd()
+    public function resetpwd($email, $resetpwd, $newpwd)
         {    if(isset($_GET['command']))
         {
             $answer ="";
-            $email = $_POST['email'];
-            $resetpwd = $_POST['resetpwd'];
-            $newpwd = $_POST['newpwd'];
+//             $email = $_POST['email'];
+//             $resetpwd = $_POST['resetpwd'];
+//             $newpwd = $_POST['newpwd'];
             
             $statement = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
             $result = $statement->execute(array('email' => $email));
@@ -199,11 +186,11 @@ class UserDataModel
         }
         }
         
-    public function resetpwdrequest()
+    public function resetpwdrequest($email)
         {
             
                 $answer="";
-                $email = $_POST['email'];
+      //          $email = $_POST['email'];
                 
                 $statement = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
                 $result = $statement->execute(array('email' => $email));
@@ -235,7 +222,33 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             }
             
     }
-    
+
+    public function authetficateDriver($rfidID)
+    {
+
+       // $username = $_SESSION['username'];
+       $username = 'rebholju'; // nur vorübergehend
+        
+        $statement = $this->pdo->prepare("SELECT rfidID FROM users WHERE username = :username");
+        $result = $statement->execute(array('username' => $username));
+        $user = $statement->fetch();
+        
+        //Überprüfung des Passworts
+        if ($rfidID == $user['rfidID']) {
+            return true;
+        } else {
+            return false;
+//             $Message = MessageHandler::getInstance();
+//             $Message->AddMessage('<div id="loginfalse">E-Mail/Benutzernamer oder Passwort ungueltig<br>
+//                         </form>
+//                         <form action="?command=resetpwdView" method="post">
+//                         <button type="submit" class="buttondesign">Reset Password</button>
+//                     </div>');           
+        }
+        
+        
+    }
+   
     
 }
 

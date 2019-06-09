@@ -20,11 +20,21 @@
 	
 	
 //  	$test = new VehicleDataModel();
-//  	$test->SetSensorData('noch kein file', 1);
+//  	$test->setSensorData('noch kein file', 1);
 //  	echo 'current Data';
 //  	$test->getCurrentSensorData(1);
 //  	echo 'historical Data';
 //  	$test->getHistoricalSensorData(1);
+        $test = new UserDataModel();
+       $test2 = $test->authetficateDriver(12345);
+        if($test2==true)
+        {
+            echo 'gelungen';
+        }
+        else {
+            
+            echo'fehler';
+        }
 	main();
 	
 	function main()
