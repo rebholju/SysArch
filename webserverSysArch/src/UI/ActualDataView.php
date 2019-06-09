@@ -47,13 +47,12 @@ echo $data[$i]['vehicleNumber'];
 echo'</td>
     <td>';
 
-echo '<td>';
-echo $data[$i]['value'];
+echo $data[$i]['sensor'];
 
 echo'</td>
     <td>';
 
-echo $data[$i]['sensor'];
+echo $data[$i]['value'];
 echo '</td>
     <td>';
     echo $data[$i]['timeStamp'];
