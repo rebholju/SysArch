@@ -131,7 +131,7 @@ class UserDataModel
         }
     }
         
-        function resetpwd()
+    public function resetpwd()
         {    if(isset($_GET['command']))
         {
             $answer ="";
@@ -199,7 +199,7 @@ class UserDataModel
         }
         }
         
-        function resetpwdrequest()
+    public function resetpwdrequest()
         {
             
                 $answer="";
@@ -235,6 +235,8 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             }
             
     }
+    
+    
 }
 
 
