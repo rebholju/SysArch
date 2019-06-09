@@ -4,6 +4,12 @@ class CommandInterpreter
     
     public function analyseCommand($command)
     {
+        if($command=="login")
+        {
+            $user = new UserController(); 
+            $user->login();
+        }
+
         if($command=="HistoricalDataView")
         {
             $view=new HistoricalDataView();
