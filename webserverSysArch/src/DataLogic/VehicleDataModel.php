@@ -179,15 +179,15 @@ class VehicleDataModel
             
         }
         
-        // Beispiel wie man daten dann auslesen kann
-        echo $data[2]['vehicleNumber'];
-        echo '  ';
-        echo $data[2]['sensor'];
-        echo '  ';
-        echo $data[2]['value'];
-        echo '  ';
-        echo $data[2]['timeStamp'];
-        echo '<br>';
+//         // Beispiel wie man daten dann auslesen kann
+//         echo $data[2]['vehicleNumber'];
+//         echo '  ';
+//         echo $data[2]['sensor'];
+//         echo '  ';
+//         echo $data[2]['value'];
+//         echo '  ';
+//         echo $data[2]['timeStamp'];
+//         echo '<br>';
         
        
         
@@ -227,17 +227,17 @@ class VehicleDataModel
         }
         
         // Beispiel wie man daten dann auslesen kann
-        for($i=0;$i<$counter;$i++)
-        {
-        echo $data[$i]['vehicleNumber'];
-        echo '  ';
-        echo $data[$i]['sensor'];
-        echo '  ';
-        echo $data[$i]['value'];
-        echo '  ';
-        echo $data[$i]['timeStamp'];
-        echo '<br>';
-        }
+//         for($i=0;$i<$counter;$i++)
+//         {
+//         echo $data[$i]['vehicleNumber'];
+//         echo '  ';
+//         echo $data[$i]['sensor'];
+//         echo '  ';
+//         echo $data[$i]['value'];
+//         echo '  ';
+//         echo $data[$i]['timeStamp'];
+//         echo '<br>';
+//         }
         
         
         
@@ -267,7 +267,7 @@ class VehicleDataModel
         
     }
     
-    public function getCurrentDriver($username)
+    public function getVehicleNumber($username)
     {     
         
         

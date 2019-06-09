@@ -8,7 +8,7 @@ class UserDataModel
         $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
     }
     
-    public function loginUser($username,$password)
+    public function loginUser($username_email,$password)
     {	 
         
         $statement = $this->pdo->prepare("SELECT * FROM users WHERE username = :username");
