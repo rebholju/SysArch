@@ -33,6 +33,10 @@ class CommandInterpreter
             $view->generatePage();
             
         }
+        if($command == "Signup")
+        {
+            
+        }
     }
     
 }

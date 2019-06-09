@@ -98,27 +98,13 @@
 	
 	function login()
 	{
-	    $pdo = new UserDataModel();
-	    $result=$pdo->login();
+	    $refUserController = new UserController();
+	    $result=$refUserController->login();
 	    if($result==false)
 	    {
 	        logout();
 	    }
 	    
-	}
-	function signup($command)
-	{
-
-
-	    
-	    if($command == "Signup")
-	    {
-	        $pdo = new UserDataModel();
-	        $pdo->signup();
-	        
-	    }
-	    $view = new SignupView(TRUE);
-	    $view->generatePage();
 	}
 	
 	function logout()
