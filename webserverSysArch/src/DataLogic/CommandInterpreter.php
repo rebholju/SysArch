@@ -12,7 +12,7 @@ class CommandInterpreter
         
         if($command=="ActualDataView")
         {
-            $view=new ActualDataView();
+            $view=new ActualDataView(getCurrentData());
             $view->generatePage();
         }
         if($command=="HomeView")
