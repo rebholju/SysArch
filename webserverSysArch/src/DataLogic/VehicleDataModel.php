@@ -267,19 +267,8 @@ class VehicleDataModel
         
     }
     
-    public function getCurrentDriver()
-    {
-        // $username = $_SESSION['username'];
-        $username = 'rebholju'; // nur vorübergehend
-        
-        $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ? WHERE vehicleNumber = ? AND sensor = ?");
-        $result = $statement->execute(array($CPUTemp, date('Y-m-d H:i:s'), $vehicleNumber, "CPUTemp"));
-        
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-            $answer.= $result;
-        }
+    public function getCurrentDriver($username)
+    {     
         
         
     }

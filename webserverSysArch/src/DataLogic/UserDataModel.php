@@ -8,7 +8,7 @@ class UserDataModel
         $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
     }
     
-    public function login($username,$password)
+    public function loginUser($username,$password)
     {	 
         
         $statement = $this->pdo->prepare("SELECT * FROM users WHERE username = :username");
@@ -44,7 +44,7 @@ class UserDataModel
         
     }
     
-    public function logout()
+    public function logoutUser()
     {
     if(isset($_GET['command'])=="logout")
     {
@@ -58,7 +58,7 @@ class UserDataModel
     }
     }
     
-    public function signup($firstname,$lastname,$email,$username,$pwd,$rfidID)
+    public function signupUser($firstname,$lastname,$email,$username,$pwd,$rfidID)
     {
         $answer ='';
             
