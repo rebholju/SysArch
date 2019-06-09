@@ -131,9 +131,9 @@ class VehicleDataModel
                                                                 }
                                 
                                                             //Speed
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp)
-                                                            VALUES(?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "Speed", $Speed, date('Y-m-d H:i:s') ));
+                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+                                                            VALUES(?, ?, ?, ?,?)");
+                                                            $result = $statement->execute(array( $vehicleNumber, "Speed", $Speed, date('Y-m-d H:i:s'), $username ));
                                 
                                                             if(!$result)
                                                                 {
@@ -141,9 +141,9 @@ class VehicleDataModel
                                                                 }
                                 
                                                             //BatteryPower
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp)
-                                                            VALUES(?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "BatteryPower", $BatteryPower, date('Y-m-d H:i:s') ));
+                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+                                                            VALUES(?, ?, ?, ?,?)");
+                                                            $result = $statement->execute(array( $vehicleNumber, "BatteryPower", $BatteryPower, date('Y-m-d H:i:s'), $username ));
                                 
                                                             if(!$result)
                                                                 {
