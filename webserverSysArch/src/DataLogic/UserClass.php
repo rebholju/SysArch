@@ -14,7 +14,7 @@
 	    function UserLogout()
 	    {
             $pdo = new UserDataModel();
-            $pdo->logout();
+            $pdo->logoutUser();
 	    }
 	    }
 

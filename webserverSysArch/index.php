@@ -6,6 +6,11 @@
 	require_once('src/DataLogic/CommandInterpreter.php');
 	require_once('src/DataLogic/MessageHandler.php');
 	require_once('src/DataLogic/VehicleDataModel.php');
+	require_once('src/DataLogic/UserController.php');
+	require_once('src/DataLogic/VehicleDataController.php');
+	
+	//librarys
+	require_once('src/phpMQTT/phpMQTT.php');
 	
 	//View
 	require_once('src/UI/View.php');
@@ -26,15 +31,15 @@
 //  	echo 'historical Data';
 //  	$test->getHistoricalSensorData(1);
         $test = new UserDataModel();
-       $test2 = $test->authetficateDriver(12345);
-        if($test2==true)
-        {
-            echo 'gelungen';
-        }
-        else {
+//        $test2 = $test->authetficateDriver(12345);
+//         if($test2==true)
+//         {
+//             echo 'gelungen';
+//         }
+//         else {
             
-            echo'fehler';
-        }
+//             echo'fehler';
+//         }
 	main();
 	
 	function main()

@@ -4,6 +4,8 @@ class ActualDataView extends View
 {
     protected function generateContent()
     {
+        $refVehicleDataController = new VehicleDataController();
+        $data = $refVehicleDataController->getCurrentData();
         $username = $_SESSION['username'];
         echo '<a id="loggedinas">' ?><?php echo $username;?><?php ;
         
@@ -34,51 +36,38 @@ echo'
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
+    <th onclick="sortNumber(2)">timestemo</th>
   
-  </tr>
-  <tr>
-    <td>88</td>
-    <td><$data[2]['timeStamp']</td>
-    <td>54</td>
-  </tr>
-  <tr>
-    <td>909</td>
-    <td>lidar</td>
-    <td>99</td>
-  </tr>
-  <tr>
-    <td>999</td>
-    <td>Speed</td>
-  <td>63</td>
-  </tr>
-  <tr>
-    <td>8877</td>
-    <td>Speed</td>
-  <td>1123</td>
-  </tr>
-  <tr>
-    <td>1231</td>
-    <td>Speed</td>
-  <td>12</td>
-  </tr>
-  <tr>
-    <td>222</td>
-    <td>Speed</td>
-  <td>223</td>
-  </tr>
-  <tr>
-    <td>12312</td>
-    <td>Speed</td>
-  <td>12</td>
-  </tr>
-  <tr>
-    <td>111</td>
-    <td>Speed</td>
-    <td>123</td>
-  </tr>
-</table>
+  </tr>';
+for($i=0;$i<sizeof($data);$i++)
+{
+    echo '<tr><td>';
+echo $data[$i]['vehicleNumber'];
+
+echo'</td>
+    <td>';
+
+echo '<td>';
+echo $data[$i]['value'];
+
+echo'</td>
+    <td>';
+
+echo $data[$i]['sensor'];
+echo '</td>
+    <td>';
+    echo $data[$i]['timeStamp'];
+    
+    echo'</td>
+  </tr>';
+}
+echo'
+</table>';
+    
+    echo sizeof($data);
 
 
+echo'
 
 
 

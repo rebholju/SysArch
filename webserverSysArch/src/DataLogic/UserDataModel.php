@@ -25,8 +25,6 @@ class UserDataModel
         //Überprüfung des Passworts
         if ($user !== false && password_verify($password, $user['password'])) {
             $_SESSION['username'] = $user['username'];      
-            $userclass = new UserClass();
-            $userclass->Home();
             return true;
         } else {
             
