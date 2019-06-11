@@ -10,32 +10,35 @@ class CommandInterpreter
             $user->login();
         }
 
-        if($command=="HistoricalDataView")
+        elseif($command=="HistoricalDataView")
         {
             $view=new HistoricalDataView();
             $view->generatePage();
         }
         
-        if($command=="ActualDataView")
+        elseif($command=="ActualDataView")
         {
             $view=new ActualDataView();
             $view->generatePage();
         }
-        if($command=="HomeView")
+        elseif($command=="HomeView")
         {
             $view=new HomeView();
             $view->generatePage();
         }
         
-        if($command=="SignupView")
+        elseif($command=="SignupView")
         {
             $view=new SignupView();
             $view->generatePage();
             
         }
-        if($command == "Signup")
+        elseif($command == "Signup")
         {
-            
+            $user = new UserController();
+            $user->Signup();
+            $view= new SignupView();
+            $view->generatePage();
         }
     }
     

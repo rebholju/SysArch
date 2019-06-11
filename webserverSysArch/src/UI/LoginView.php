@@ -8,6 +8,7 @@ class LoginView extends View
 
         echo '  
     </div>
+    <br>
     <h1>Login</h1>
     <div id="login">
     <form action="?command=login" method="post">
@@ -15,8 +16,6 @@ class LoginView extends View
 	<input type="password" name="pwd" placeholder="password"><br />
 	<button type="submit" class="buttondesign">Login</button>
     </form>
-    <form action="?command=SignupView" method="post">
-    <button type="submit" class="buttondesign">Sign up</button>
     </div>';
        	echo "<br>";
        	

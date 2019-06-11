@@ -24,6 +24,25 @@ abstract class View
 	<div id="head">
   <a id="title">System Architecture Webserver</a>
     ';
+        if(isset($_SESSION['username']))
+        {
+            $username = $_SESSION['username'];
+                echo '<a id="loggedinas">' ?><?php echo $username;?><?php ;
+        
+                echo'
+                    </a>
+                    <form action="?command=logout" method="post">
+                    <button type="submit" >logout</button>
+                    </form>
+                    </div>
+                
+                <div id="nav">
+                <a id="red" href="index.php?command=HomeView">Home</a>
+                <a id="orange" href="index.php?command=HistoricalDataView">HistoricalData</a>
+                <a id="green" href="index.php?command=ActualDataView">ActualData</a>
+                <a id="blue" href="index.php?command=SignupView">AddUser</a>
+                </div>';
+        }
                 
                 
         $this -> generateContent();  

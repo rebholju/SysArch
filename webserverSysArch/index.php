@@ -30,7 +30,7 @@
 //  	$test->getCurrentSensorData(1);
 //  	echo 'historical Data';
 //  	$test->getHistoricalSensorData(1);
-        $test = new UserDataModel();
+      //  $test = new UserDataModel();
 //        $test2 = $test->authetficateDriver(12345);
 //         if($test2==true)
 //         {
@@ -64,6 +64,7 @@
 
 	    if(!isset($_GET['command']))
 	    {
+	        unset($_SESSION['username']);
 	        logout();
 	    
 	    }
@@ -78,11 +79,6 @@
 	    else if($command == "logout")
 	    {
             logout();
-	    }
-	    else if($command == "SignupView"|| $command == "Signup")
-	    {
-	       signup($command);
-	        
 	    }
 	    else if($command == "resetpwdView" || $command == "resetpwd" || $command == "resetpwdfromemailView" || $command == "resetpwdfromemail")
 	    {

@@ -1,6 +1,13 @@
 <?php
 	class UserController
 	{
+	   private $refCurrentUserDataModel;
+	   
+	   public function __construct()
+	   {
+	       $this->refCurrentUserDataModel = new UserDataModel();
+	   }
+	    //Function to login User
         public function login() 
         {
 
@@ -8,8 +15,8 @@
                 $password = $_POST['pwd'];
             
 
-            $refCurrentUserDataModel = new UserDataModel();
-            $status = $refCurrentUserDataModel->loginUser($username_email, $password);
+            
+            $status = $this->refCurrentUserDataModel->loginUser($username_email, $password);
 
             if($status)
             {
@@ -18,13 +25,29 @@
 	            return true;
             }
             else{
-                $refCurrentUserDataModel->logoutUser();
+                $this->refCurrentUserDataModel->logoutUser();
                 $view = new LoginView(TRUE);
 	            $view->generatePage();
 	            return false;
             }
+         
+            
             
 
         }
+        
+        public function Signup()
+        {
+            $firstname = $_POST['firstname'];
+            $email = $_POST['email'];
+            $lastname = $_POST['lastname'];
+            
+            $username = $_POST['username'];
+            $pwd = $_POST['pwd'];
+            $rfidID = $_POST['rfidID'];
+            
+            $this->refCurrentUserDataModel->signupUser($firstname, $lastname, $email, $username, $pwd, $rfidID);
+        }
+        
 
     }

@@ -255,6 +255,7 @@ class VehicleDataModel
             $Message->AddMessage($answer);
         }
         
+        return $data;
         
     }
         

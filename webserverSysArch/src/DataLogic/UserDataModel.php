@@ -59,6 +59,7 @@ class UserDataModel
     public function signupUser($firstname,$lastname,$email,$username,$pwd,$rfidID)
     {
         $answer ='';
+        $error = false;
             
             if(empty($firstname)||empty($lastname)||empty($email)||empty($username)||empty($pwd)||empty($rfidID))
             {
@@ -92,12 +93,12 @@ class UserDataModel
                         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
                         
                         $statement = $this->pdo->prepare("INSERT INTO users(username, firstname, lastname, email, password, rfidID)
-                            VALUES(?, ?, ?, ?, ?)");
+                            VALUES(?, ?, ?, ?, ?, ?)");
                         $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd, $rfidID));
                         
                         if($result)
                         {
-                            $answer .= '<div id="signupsucess">Sie wurden erfolgreich registriert !</a>';
+                            $answer .= '<div id="signupsucess">Neuen Benutzer erfolgreich registriert !</a>';
                         }
                         else
                         {
