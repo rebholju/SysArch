@@ -19,11 +19,10 @@ abstract class View
                 <html lang="de">
                 <head>
                 <title>SysArch</title>
-            <link href="src/UI/stylesheet.css" rel="stylesheet">
-    </head>
-	<div id="head">
-  <a id="title">System Architecture Webserver</a>
-    ';
+                <link href="src/UI/stylesheet.css" rel="stylesheet">
+                </head>
+            	<div id="head">
+                <a id="title">System Architecture Webserver</a>';
         if(isset($_SESSION['username']))
         {
             $username = $_SESSION['username'];
@@ -36,12 +35,17 @@ abstract class View
                     </form>
                     </div>
                 
-                <div id="nav">
-                <a id="red" href="index.php?command=HomeView">Home</a>
-                <a id="orange" href="index.php?command=HistoricalDataView">HistoricalData</a>
-                <a id="green" href="index.php?command=ActualDataView">ActualData</a>
-                <a id="blue" href="index.php?command=SignupView">AddUser</a>
-                </div>';
+                    <div id="nav">
+                    <a id="red" href="index.php?command=HomeView">Home</a>
+                    <a id="orange" href="index.php?command=HistoricalDataView">HistoricalData</a>
+                    <a id="green" href="index.php?command=ActualDataView">ActualData</a>';
+                $user = new UserController();
+                if($user->getRole()==10)
+                {
+                    echo'
+                        <a id="blue" href="index.php?command=UserDataView">AddUser</a>
+                        </div>';
+                }
         }
                 
                 

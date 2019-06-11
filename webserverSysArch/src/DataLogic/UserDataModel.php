@@ -60,6 +60,7 @@ class UserDataModel
     {
         $answer ='';
         $error = false;
+        $role = 20;
             
             if(empty($firstname)||empty($lastname)||empty($email)||empty($username)||empty($pwd)||empty($rfidID))
             {
@@ -92,9 +93,9 @@ class UserDataModel
                         
                         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
                         
-                        $statement = $this->pdo->prepare("INSERT INTO users(username, firstname, lastname, email, password, rfidID)
-                            VALUES(?, ?, ?, ?, ?, ?)");
-                        $result = $statement->execute(array( $username, $firstname, $lastname, $email, $hashedPwd, $rfidID));
+                        $statement = $this->pdo->prepare("INSERT INTO users(username, role, firstname, lastname, email, password, rfidID)
+                            VALUES(?, ?, ?, ?, ?, ?, ?)");
+                        $result = $statement->execute(array( $username, $role, $firstname, $lastname, $email, $hashedPwd, $rfidID));
                         
                         if($result)
                         {
@@ -244,10 +245,53 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
 //                         <button type="submit" class="buttondesign">Reset Password</button>
 //                     </div>');           
         }
-        
-        
     }
-   
+        
+        
+        public function getUserRole($username)
+        {
+            $statement = $this->pdo->prepare("SELECT role FROM users WHERE username = :username");
+            $result = $statement->execute(array('username' => $username));
+            $user = $statement->fetch();
+            
+            if($user)
+            {
+                return $user['role'];
+            }
+            else
+            {
+                $Message = MessageHandler::getInstance();
+                $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+            }
+        }
+        
+        
+        public function getUserData()
+        {
+            $counter = 0;
+            $userdata = array();
+            
+            $statement = $this->pdo->prepare("SELECT * FROM users");
+            $result = $statement->execute();
+            while ($row = $statement->fetch()) 
+            {
+                $userdata[] = $row;
+                $counter++;
+                
+            }
+            
+
+                
+            
+            if(!$result)
+            {
+                $Message = MessageHandler::getInstance();
+                $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+            }
+            
+            return $userdata;
+        }
+        
     
     
 }

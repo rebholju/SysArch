@@ -4,6 +4,10 @@ class CommandInterpreter
     
     public function analyseCommand($command)
     {
+        
+        $user = new UserController();
+        $role = $user->getRole();
+        
         if($command=="login")
         {
             $user = new UserController(); 
@@ -27,18 +31,22 @@ class CommandInterpreter
             $view->generatePage();
         }
         
-        elseif($command=="SignupView")
+        elseif($command=="SignupView" && $role == 10)
         {
             $view=new SignupView();
             $view->generatePage();
-            
         }
-        elseif($command == "Signup")
+        elseif($command=="UserDataView" && $role == 10)
         {
-            $user = new UserController();
-            $user->Signup();
-            $view= new SignupView();
+            $view = new UserDataView();
             $view->generatePage();
+        }
+        elseif($command == "Signup" && $role == 10)
+        {
+           $user = new UserController();
+           $user->Signup();
+           $view= new SignupView();
+           $view->generatePage();         
         }
     }
     

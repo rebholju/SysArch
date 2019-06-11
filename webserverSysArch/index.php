@@ -1,7 +1,6 @@
 
 	<?php 
-	require_once('src/DataLogic/UserClass.php');
-	//require_once('src/DataLogic/resetPwd.php');
+	
 	require_once('src/DataLogic/UserDataModel.php');
 	require_once('src/DataLogic/CommandInterpreter.php');
 	require_once('src/DataLogic/MessageHandler.php');
@@ -21,6 +20,8 @@
 	require_once('src/UI/ResetPwdFromEmailView.php');
 	require_once('src/UI/HistoricalDataView.php');
 	require_once('src/UI/ActualDataView.php');
+	require_once('src/UI/UserDataView.php');
+	
 	
 	
 	
@@ -110,8 +111,8 @@
 	
 	function logout()
 	{
-	    $userclass = new UserClass();
-	    $userclass->UserLogout();
+	    $refUserController = new UserController();
+	    $result=$refUserController->UserLogout();
 	    $view = new LoginView(TRUE);
 	    $view->generatePage();
 	}

@@ -26,16 +26,22 @@
             }
             else{
                 $this->refCurrentUserDataModel->logoutUser();
-                $view = new LoginView(TRUE);
-	            $view->generatePage();
 	            return false;
             }
          
-            
+
             
 
         }
         
+        public function UserLogout()
+        {
+            $pdo = new UserDataModel();
+            $pdo->logoutUser();
+        }
+        
+        
+        //signup
         public function Signup()
         {
             $firstname = $_POST['firstname'];
@@ -47,6 +53,22 @@
             $rfidID = $_POST['rfidID'];
             
             $this->refCurrentUserDataModel->signupUser($firstname, $lastname, $email, $username, $pwd, $rfidID);
+        }
+        
+        //get Role
+        public function getRole()
+        {
+            $username = $_SESSION['username'];
+            $role = $this->refCurrentUserDataModel->getUserRole($username);
+            return $role;
+        }
+        
+        
+        //get Userdata
+        public function getAllUserData()
+        {
+            $userdata = $this->refCurrentUserDataModel->getUserData();
+            return $userdata;
         }
         
 
