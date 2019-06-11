@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 09. Jun 2019 um 10:17
--- Server-Version: 10.1.38-MariaDB
--- PHP-Version: 7.3.4
+-- Erstellungszeit: 11. Jun 2019 um 17:35
+-- Server-Version: 10.1.40-MariaDB
+-- PHP-Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `idUsers` int(11) NOT NULL,
+  `role` int(11) NOT NULL,
   `username` tinytext NOT NULL,
   `firstname` tinytext NOT NULL,
   `lastname` tinytext NOT NULL,
@@ -44,10 +45,11 @@ CREATE TABLE `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`idUsers`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`, `rfidID`) VALUES
-(14, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$GLP7r3wRuh0VRRa7Ssfsfehr0/.qmHMGGbiYy3xZAVWShI7G1SLOK', '2019-06-06 17:30:43', '', 12345),
-(15, 'ju721reb', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$d/l5q2XIHP1CsMkDxdslJOpPiTUZg262xavYqME1G9sR.UYM75oqW', '2019-06-03 09:19:00', '', 0),
-(16, 'test', 'Julian', 'sagfa', 'rebholju@googlemail.com', '$2y$10$pxUTNCxCvLyukqVj7Fqwme4c6yGkRQkNtrNZdlj6BFQlakVxbIGoy', '0000-00-00 00:00:00', '', 0);
+INSERT INTO `users` (`idUsers`, `role`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`, `rfidID`) VALUES
+(14, 10, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$GLP7r3wRuh0VRRa7Ssfsfehr0/.qmHMGGbiYy3xZAVWShI7G1SLOK', '2019-06-11 17:24:35', '', 12345),
+(15, 20, 'ju721reb', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$d/l5q2XIHP1CsMkDxdslJOpPiTUZg262xavYqME1G9sR.UYM75oqW', '2019-06-11 17:13:36', '', 0),
+(20, 20, 'HalloTest', 'asaf', 'asfasf', '1123@web.de', '$2y$10$bvgxnf5bX3ijVJbQBOStTOv1WfVqyVgLsab50O0mfIqmf01OCzkMG', '0000-00-00 00:00:00', '', 2142),
+(21, 20, 'test', 'test1', 'ttest', 'asf@gmail.com', '$2y$10$vegMpfIz4Un00vGx5YGBUuyR2hBLEOnggycZx7BpLtKNyyqIe9.mm', '2019-06-11 17:24:46', '', 213);
 
 -- --------------------------------------------------------
 
@@ -125,7 +127,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
