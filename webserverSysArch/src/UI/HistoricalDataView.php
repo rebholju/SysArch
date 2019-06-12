@@ -6,7 +6,7 @@ class HistoricalDataView extends View
     {
         $refVehicleDataController = new VehicleDataController();
         $data = $refVehicleDataController->getHistoricalData();
-       
+        $user = new UserController();
         echo'
         
 <table id="ActualDataTable">
@@ -14,29 +14,41 @@ class HistoricalDataView extends View
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortNumber(2)">timestemo</th>
-            
+    <th onclick="sortNumber(2)">timestemp</th>';
+    if($user->getRole()==10)
+    {
+    echo'<th onclick="sortNumber(2)">Driver</th>';
+    }
+    echo'
   </tr>';
         for($i=0;$i<sizeof($data);$i++)
         {
             echo '<tr><td>';
+            
             echo $data[$i]['vehicleNumber'];
             
-            echo'</td>
-    <td>';
+            echo'</td><td>';
             
             echo $data[$i]['sensor'];
             
-            echo'</td>
-    <td>';
+            echo'</td><td>';
             
             echo $data[$i]['value'];
-            echo '</td>
-    <td>';
+            
+            echo '</td><td>';
+            
             echo $data[$i]['timeStamp'];
             
-            echo'</td>
-  </tr>';
+            echo '</td>';
+            if($user->getRole()==10)
+            {   echo'<td>';
+                echo $data[$i]['driver'];
+                echo'</td></tr>';
+            }
+            else 
+            {
+                echo '</tr>';
+            }
         }
         echo'
 </table>';

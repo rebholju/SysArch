@@ -11,15 +11,36 @@ class VehicleDataController
         public function getCurrentData()
         {
             $username = $_SESSION['username'];
-            $data = $this->refVehicleDataModel->getCurrentSensorData($username);
-            return $data;
+            $refUserDataModel = new UserDataModel();
+            $role = $refUserDataModel->getUserRole($username);
+            if($role == 20)
+            {
+                $data = $this->refVehicleDataModel->getCurrentSensorData($username);
+                return $data;
+            }
+            else if($role == 10)
+            {
+                $data = $this->refVehicleDataModel->getAllCurrentSensorData();
+                return $data;
+            }
         }
+        
 
         public function getHistoricalData()
-        {        
+        {       
             $username = $_SESSION['username'];
+            $refUserDataModel = new UserDataModel();
+            $role = $refUserDataModel->getUserRole($username);
+            if($role == 20)
+            {
             $data = $this->refVehicleDataModel->getHistoricalSensorData($username);
             return $data;
+            }
+            else if($role == 10)
+            {
+                $data = $this->refVehicleDataModel->getAllHistoricalSensorData();
+                return $data;
+            }
         }
 
         public function setVehicleData($MQTT)

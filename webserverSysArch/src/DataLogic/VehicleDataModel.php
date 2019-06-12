@@ -178,19 +178,6 @@ class VehicleDataModel
             
         }
         
-//         // Beispiel wie man daten dann auslesen kann
-//         echo $data[2]['vehicleNumber'];
-//         echo '  ';
-//         echo $data[2]['sensor'];
-//         echo '  ';
-//         echo $data[2]['value'];
-//         echo '  ';
-//         echo $data[2]['timeStamp'];
-//         echo '<br>';
-        
-       
-        
-        
         if(!$result)
         {
             $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
@@ -205,6 +192,33 @@ class VehicleDataModel
         }
         return $data;
            
+    }
+    
+    public function getAllCurrentSensorData()
+    {
+        $answer = "";
+        $data = array();
+        $statement = $this->pdo->prepare("SELECT * FROM  vehiclecurrentdata");
+        $result = $statement->execute();
+        while ($row = $statement->fetch()) {
+            $data[] = $row;
+            
+        }
+          
+        if(!$result)
+        {
+            $answer .= '<div id="loginfalse">Es ist ein Fehler passiert !<br>';
+        }
+        
+        
+        if(!empty($answer))
+        {
+            $answer .= '</div>';
+            $Message = MessageHandler::getInstance();
+            $Message->AddMessage($answer);
+        }
+        return $data;
+        
     }
     
     public function getHistoricalSensorData($username)
@@ -222,26 +236,43 @@ class VehicleDataModel
             $counter++;
             
         }
-        
-        // Beispiel wie man daten dann auslesen kann
-//         for($i=0;$i<$counter;$i++)
-//         {
-//         echo $data[$i]['vehicleNumber'];
-//         echo '  ';
-//         echo $data[$i]['sensor'];
-//         echo '  ';
-//         echo $data[$i]['value'];
-//         echo '  ';
-//         echo $data[$i]['timeStamp'];
-//         echo '<br>';
-//         }
-        
-        
-        
-        
+
         if(!$result)
         {
             $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+        }
+        
+        
+        if(!empty($answer))
+        {
+            $answer .= '</div>';
+            $Message = MessageHandler::getInstance();
+            $Message->AddMessage($answer);
+        }
+        
+        return $data;
+        
+    }
+    
+    public function getAllHistoricalSensorData()
+    {
+        
+        $counter = 0;
+        $answer = "";
+        $data = array();
+        
+        
+        $statement = $this->pdo->prepare("SELECT * FROM  vehiclehistoricaldata");
+        $result = $statement->execute();
+        while ($row = $statement->fetch()) {
+            $data[] = $row;
+            $counter++;
+            
+        }
+        
+        if(!$result)
+        {
+            $answer .= '<div id="loginfalse">Es ist ein Fehler passiert !<br>';
         }
         
         
