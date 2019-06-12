@@ -1,30 +1,40 @@
 <?php
 class VehicleDataController 
 {
+    private $refVehicleDataModel;
+    
+    public function __construct()
+    {
+        $this->refVehicleDataModel = new VehicleDataModel();
+    }
+    
         public function getCurrentData()
         {
-            //$vehicleNumber = getVehicleNumber($_SESSION['username']);
-            $vehicleNumber = 1;
-            $refCurrentVehicleDataModel = new VehicleDataModel();
-            $data = $refCurrentVehicleDataModel->getCurrentSensorData($vehicleNumber);
+            $username = $_SESSION['username'];
+            $data = $this->refVehicleDataModel->getCurrentSensorData($username);
             return $data;
         }
 
         public function getHistoricalData()
-        {
-            //$vehicleNumber = getVehicleNumber($_SESSION['username']);
-            $vehicleNumber = 1;
-            $refHistoricalVehicleDataModel = new VehicleDataModel();
-            $data = $refHistoricalVehicleDataModel->getHistoricalSensorData($vehicleNumber);
+        {        
+            $username = $_SESSION['username'];
+            $data = $this->refVehicleDataModel->getHistoricalSensorData($username);
             return $data;
         }
 
         public function setVehicleData($MQTT)
         {
-            //$vehicleNumber = getVehicleNumber($_SESSION['username']);
-            $vehicleNumber = 1;
-            $refHistoricalVehicleDataModel = new VehicleDataModel();
-            setSensorData($MQTT, $vehicleNumber);
+            //vehiclenumber kommt von Mqttprotokoll
+            
+            $MQTT = file_get_contents("example_2.json");
+            $vehicleNumber=1;
+            $this->refVehicleDataModel->setSensorData($MQTT, $vehicleNumber);
+        }
+        
+        public function newVehicle()
+        {
+            $vehicleNumber = $_POST['vehicleNumber'];
+            $this->refVehicleDataModel->registerNewVehicle($vehicleNumber);
         }
 }
 

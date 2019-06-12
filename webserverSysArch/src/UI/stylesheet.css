@@ -170,3 +170,8 @@ background-color: #dfd;
   text-align: center;
   
 }
+
+#Sameline{
+	display: flex;
+	justify-content: center;
+}

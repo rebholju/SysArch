@@ -225,17 +225,14 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
 
     public function authetficateDriver($rfidID)
     {
-
-       // $username = $_SESSION['username'];
-       $username = 'rebholju'; // nur vorübergehend
         
-        $statement = $this->pdo->prepare("SELECT rfidID FROM users WHERE username = :username");
-        $result = $statement->execute(array('username' => $username));
+        $statement = $this->pdo->prepare("SELECT username FROM users WHERE rfidID = :rfidID");
+        $result = $statement->execute(array('rfidID' => $rfidID));
         $user = $statement->fetch();
         
         //Überprüfung des Passworts
-        if ($rfidID == $user['rfidID']) {
-            return true;
+        if ($user) {
+            return $user['username'];
         } else {
             return false;
 //             $Message = MessageHandler::getInstance();

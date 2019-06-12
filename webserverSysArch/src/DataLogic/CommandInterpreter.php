@@ -36,9 +36,9 @@ class CommandInterpreter
             $view=new SignupView();
             $view->generatePage();
         }
-        elseif($command=="UserDataView" && $role == 10)
+        elseif($command=="OptionsView" && $role == 10)
         {
-            $view = new UserDataView();
+            $view = new OptionsView();
             $view->generatePage();
         }
         elseif($command == "Signup" && $role == 10)
@@ -47,6 +47,14 @@ class CommandInterpreter
            $user->Signup();
            $view= new SignupView();
            $view->generatePage();         
+        }
+        elseif($command == "NewVehicle")
+        {
+            $vehicle= new VehicleDataController();
+            $vehicle->newVehicle();
+            $view = new OptionsView();
+            $view->generatePage();
+            
         }
     }
     

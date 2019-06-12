@@ -40,9 +40,7 @@ class HistoricalDataView extends View
         }
         echo'
 </table>';
-        
-        echo sizeof($data);
-        
+          
         
         echo'
             

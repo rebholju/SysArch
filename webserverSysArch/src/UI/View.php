@@ -43,7 +43,7 @@ abstract class View
                 if($user->getRole()==10)
                 {
                     echo'
-                        <a id="blue" href="index.php?command=UserDataView">AddUser</a>
+                        <a id="blue" href="index.php?command=OptionsView">Options</a>
                         </div>';
                 }
         }

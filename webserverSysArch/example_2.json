@@ -1,16 +1,17 @@
  {
         "CPU": {
-				"CPUTemp": 12,
+				"CPUTemp": 300,
 				"CPUload": 69
 				},
 		
         "RT": 	{
 				"jitter": "8",
-				"numOfRTThreads" : "eins"
+				"numOfRTThreads" : "test"
 				},
 	"Sensors": 	{
 				"LIDAR":190,
 				"BatteryPower": "11",
-				"Speed" : "22"
+				"Speed" : "22",
+				"RFID" : 12345		
 				}
 }

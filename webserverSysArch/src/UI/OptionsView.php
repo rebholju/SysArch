@@ -1,25 +1,30 @@
 <?php
 
-class UserDataView extends View
+class OptionsView extends View
 {
     protected function generateContent()
     {
         $refUserController = new UserController();
         $userdata = $refUserController->getAllUserData();
         
-        echo' 
-              <div id="login">
-              <form action="?command=SignupView" method="post">
+        echo'     
                <br>
                <br>
+               <br> 
+               <div id="login">
+               <form action="?command=NewVehicle" method="post" >
+               <input type="text" name="vehicleNumber" placeholder="Vehiclenumber"><br />
+               <button type="submit" class="buttondesign">Register new Vehicle</button>
+               </form>
                <br>
+               <br>
+               <br>      
+               <form action="?command=SignupView" method="post">
                <button type="submit" class="buttondesign">Signup new User</button>
                </form>
                </div>';
         
         echo'
-                <br>
-                <br>   
                 <table id="ActualDataTable">
                 <tr>
                 <th onclick="sortNumber(0)">Username</th>
