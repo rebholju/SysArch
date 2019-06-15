@@ -17,10 +17,10 @@ echo'
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortNumber(2)">timestemp</th>';
+    <th onclick="sortNumber(3)">timestemp</th>';
     if($user->getRole()==10)
     {
-    echo'<th onclick="sortNumber(2)">Driver</th>';
+    echo'<th onclick="sortName(4)">Driver</th>';
     }
     echo'
   
@@ -57,6 +57,7 @@ for($i=0;$i<sizeof($data);$i++)
     
     
 }
+
 echo'
 </table>';
 
@@ -75,7 +76,7 @@ function sortName(n) {
   table = document.getElementById("ActualDataTable");
   switching = true;
   //Set the sorting direction to ascending:
-  dir = "asc"; 
+  dir = "asc";
   /*Make a loop that will continue until
   no switching has been done:*/
   while (switching) {
@@ -113,7 +114,7 @@ function sortName(n) {
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
       //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
+      switchcount ++;
     } else {
       /*If no switching has been done AND the direction is "asc",
       set the direction to "desc" and run the while loop again.*/
@@ -124,13 +125,13 @@ function sortName(n) {
     }
   }
 }
-
+            
 function sortNumber(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("ActualDataTable");
   switching = true;
   //Set the sorting direction to ascending:
-  dir = "asc"; 
+  dir = "asc";
   /*Make a loop that will continue until
   no switching has been done:*/
   while (switching) {
@@ -168,7 +169,7 @@ function sortNumber(n) {
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
       //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
+      switchcount ++;
     } else {
       /*If no switching has been done AND the direction is "asc",
       set the direction to "desc" and run the while loop again.*/
@@ -179,8 +180,8 @@ function sortNumber(n) {
     }
   }
 }
-
-
+            
+            
 </script>
 
 </body>

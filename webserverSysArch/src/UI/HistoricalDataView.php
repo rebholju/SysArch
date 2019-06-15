@@ -9,15 +9,15 @@ class HistoricalDataView extends View
         $user = new UserController();
         echo'
         
-<table id="ActualDataTable">
+<table id="HistoricalDataTable">
   <tr>
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortNumber(2)">timestemp</th>';
+    <th onclick="sortNumber(3)">timestemp</th>';
     if($user->getRole()==10)
     {
-    echo'<th onclick="sortNumber(2)">Driver</th>';
+    echo'<th onclick="sortNumber(4)">Driver</th>';
     }
     echo'
   </tr>';
@@ -65,7 +65,7 @@ class HistoricalDataView extends View
 <script>
 function sortName(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("ActualDataTable");
+  table = document.getElementById("HistoricalDataTable");
   switching = true;
   //Set the sorting direction to ascending:
   dir = "asc";
@@ -120,7 +120,7 @@ function sortName(n) {
             
 function sortNumber(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("ActualDataTable");
+  table = document.getElementById("HistoricalDataTable");
   switching = true;
   //Set the sorting direction to ascending:
   dir = "asc";

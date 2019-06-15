@@ -175,3 +175,35 @@ background-color: #dfd;
 	display: flex;
 	justify-content: center;
 }
+
+#HistoricalDataTable{
+ font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+ 
+}
+
+#HistoricalDataTable tr:hover 
+{
+	
+background-color: #dfd;
+
+}
+
+
+#HistoricalDataTable th {
+
+  border: 2px solid black;
+  background-color: #bfb;
+  border-collapse: collapse;
+  padding: 15px;
+  text-align: center;
+}
+
+#HistoricalDataTable td {
+
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 15px;
+  text-align: center;
+}
