@@ -17,7 +17,7 @@ echo'
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortNumber(3)">timestemp</th>';
+    <th onclick="sortName(3)">timestemp</th>';
     if($user->getRole()==10)
     {
     echo'<th onclick="sortName(4)">Driver</th>';

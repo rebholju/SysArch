@@ -27,18 +27,21 @@ class OptionsView extends View
         echo'
                 <table id="ActualDataTable">
                 <tr>
-                <th onclick="sortNumber(0)">Username</th>
+                <th onclick="sortName(0)">Username</th>
                 <th onclick="sortName(1)">Firstname</th>
-                <th onclick="sortNumber(2)">Lastname</th>
-                <th onclick="sortNumber(2)">E-Mail</th>
-                <th onclick="sortNumber(2)">Last Login</th>
-                        
+                <th onclick="sortName(2)">Lastname</th>
+                <th onclick="sortName(3)">E-Mail</th>
+                <th onclick="sortName(4)">Last Login</th>
+                <th>Delete User</th>
+                <th>Edit User</th>
+                            
                 </tr>';
         
         for($i=0;$i<sizeof($userdata);$i++)
         {
             echo '<tr><td>';
             echo $userdata[$i]['username'];
+            
             
             echo'</td>
     <td>';
@@ -58,6 +61,24 @@ class OptionsView extends View
             echo $userdata[$i]['lastlogin'];
             
             echo'</td>
+
+    <td>';
+            echo ' <form action="?command=DeleteUser" method="post">
+               <button type="submit">Delete User</button>
+               </form>';
+            
+            echo'</td>
+
+    <td>';
+            echo '<form action="?command=EditUser" method="post">
+               <button type="submit">Edit User[$i]</button>
+               </form>';
+            
+            echo'</td>
+
+
+
+
   </tr>';
         }
         echo'

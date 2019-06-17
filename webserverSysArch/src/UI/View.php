@@ -20,6 +20,7 @@ abstract class View
                 <head>
                 <title>SysArch</title>
                 <link href="src/UI/stylesheet.css" rel="stylesheet">
+       
                 </head>
             	<div id="head">
                 <a id="title">System Architecture Webserver</a>';
