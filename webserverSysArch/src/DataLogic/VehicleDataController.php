@@ -47,7 +47,7 @@ class VehicleDataController
         {
             //vehiclenumber kommt von Mqttprotokoll
             
-            $MQTT = file_get_contents("example_2.json");
+            $MQTT = file_get_contents("WikiBeispiel.json");
             $vehicleNumber=1;
             $this->refVehicleDataModel->setSensorData($MQTT, $vehicleNumber);
         }

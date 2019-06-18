@@ -48,7 +48,7 @@ class CommandInterpreter
            $view= new SignupView();
            $view->generatePage();         
         }
-        elseif($command == "NewVehicle")
+        elseif($command == "NewVehicle"  && $role == 10)
         {
             $vehicle= new VehicleDataController();
             $vehicle->newVehicle();

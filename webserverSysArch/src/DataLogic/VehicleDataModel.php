@@ -16,141 +16,202 @@ class VehicleDataModel
         $answer = "";
         $data = json_decode($JSON, true);
 
+       $username = $data['Passengers'][0]['name'];
+       $isPresent = $data['Passengers'][0]['isPresent'];
+       if($isPresent)
+       {
+           for($i=0;$i<sizeof($data['Sensors']);$i++)
+           {
+               $name = $data['Sensors'][$i]['name'];
+               $value = $data['Sensors'][$i]['value'];
+               $state = $data['Sensors'][$i]['state'];
+               $unit = $data['Sensors'][$i]['unit'];
+               $timestamp = $data['Sensors'][$i]['timestamp'];  // timestamp noch in richtiges format dann wieder umkehren
+               
+               
+               if($state=='ON')
+               {
+                   $statement = $this->pdo->prepare("SELECT sensor FROM vehiclehistoricaldata WHERE vehicleNumber = :vehicleNumber AND sensor = :name)
+                   VALUES(?, ?, ?, ?, ?)");
+                   $result = $statement->execute(array( $vehicleNumber, $name));
+                   if($result)
+                   {
+                       //update data
+                       $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ? ");
+                       $result = $statement->execute(array($value, $timestamp, $username, $vehicleNumber, $name));
+                       
+                       if(!$result)
+                       {
+                           $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern der aktuellen Daten passiert !<br>';
+                           $answer.= $result;
+                       }
+                   }
+                   else
+                   {
+                       $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor, value, timeStamp, driver)
+                   VALUES(?, ?, ?, ?, ?)");
+                       $result = $statement->execute(array( $vehicleNumber, $name, $value, $timestamp, $username ));
+                       
+                       if(!$result)
+                       {
+                           $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                           $answer.= $result;
+                       }
+                   }
+                   
+                   
+
+                   
+                   
+                   
+                   $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
+                   VALUES(?, ?, ?, ?, ?)");
+                   $result = $statement->execute(array( $vehicleNumber, $name, $value, $timestamp, $username ));
+                   
+                   if(!$result)
+                   {
+                   $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                   $answer.= $result;
+                   }
+                   
+                   
+               }
+           }           
+       }
+       
+
+//         $jitter = $data['RT']['jitter'];
         
-        $CPUTemp = $data['CPU']['CPUTemp'];
+//         $numOfRTThreads = $data['RT']['numOfRTThreads'];
 
-        $jitter = $data['RT']['jitter'];
+//         $LIDAR = $data['Sensors']['LIDAR'];
+
+//         $Speed = $data['Sensors']['Speed'];
+
+//         $BatteryPower = $data['Sensors']['BatteryPower'];
         
-        $numOfRTThreads = $data['RT']['numOfRTThreads'];
-
-        $LIDAR = $data['Sensors']['LIDAR'];
-
-        $Speed = $data['Sensors']['Speed'];
-
-        $BatteryPower = $data['Sensors']['BatteryPower'];
+//         $rfidID = $data['Sensors']['RFID'];
         
-        $rfidID = $data['Sensors']['RFID'];
-        
-        $refUserDataModel = new UserDataModel();
-        $username = $refUserDataModel->authetficateDriver($rfidID);
+//         $refUserDataModel = new UserDataModel();
+//         $username = $refUserDataModel->authetficateDriver($rfidID);
 
-                            //update data
-                            $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ? ");
-                            $result = $statement->execute(array($CPUTemp, date('Y-m-d H:i:s'), $username, $vehicleNumber, "CPUTemp"));
+//                             //update data
+//                             $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ? ");
+//                             $result = $statement->execute(array($CPUTemp, date('Y-m-d H:i:s'), $username, $vehicleNumber, "CPUTemp"));
 
-                            if(!$result)
-                                {
-                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                    $answer.= $result;
-                                }
+//                             if(!$result)
+//                                 {
+//                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                     $answer.= $result;
+//                                 }
 
-                            //jitter
-                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
-                                $result = $statement->execute(array( $jitter, date('Y-m-d H:i:s'), $username, $vehicleNumber, "jitter" ));
+//                             //jitter
+//                                 $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
+//                                 $result = $statement->execute(array( $jitter, date('Y-m-d H:i:s'), $username, $vehicleNumber, "jitter" ));
 
-                            if(!$result)
-                                {
-                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                }
+//                             if(!$result)
+//                                 {
+//                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                 }
 
-                            //numOfRTThreads
-                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?,driver = ? WHERE vehicleNumber = ? AND sensor = ?");
-                                $result = $statement->execute(array( $numOfRTThreads, date('Y-m-d H:i:s'), $username , $vehicleNumber, "numOfRTThreads"));
+//                             //numOfRTThreads
+//                                 $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?,driver = ? WHERE vehicleNumber = ? AND sensor = ?");
+//                                 $result = $statement->execute(array( $numOfRTThreads, date('Y-m-d H:i:s'), $username , $vehicleNumber, "numOfRTThreads"));
 
-                            if(!$result)
-                                {
-                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                }
+//                             if(!$result)
+//                                 {
+//                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                 }
 
-                            //LIDAR
-                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
-                                $result = $statement->execute(array( $LIDAR, date('Y-m-d H:i:s'), $username , $vehicleNumber, "LIDAR"));
+//                             //LIDAR
+//                                 $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
+//                                 $result = $statement->execute(array( $LIDAR, date('Y-m-d H:i:s'), $username , $vehicleNumber, "LIDAR"));
 
-                            if(!$result)
-                                {
-                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                }
+//                             if(!$result)
+//                                 {
+//                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                 }
 
-                            //Speed
-                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
-                                $result = $statement->execute(array( $Speed, date('Y-m-d H:i:s'), $username , $vehicleNumber, "Speed"));
+//                             //Speed
+//                                 $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
+//                                 $result = $statement->execute(array( $Speed, date('Y-m-d H:i:s'), $username , $vehicleNumber, "Speed"));
 
-                            if(!$result)
-                                {
-                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                }
+//                             if(!$result)
+//                                 {
+//                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                 }
 
-                            //BatteryPower
-                                $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
-                                $result = $statement->execute(array(  $BatteryPower, date('Y-m-d H:i:s'), $username , $vehicleNumber, "BatteryPower"));
+//                             //BatteryPower
+//                                 $statement = $this->pdo->prepare("UPDATE vehiclecurrentdata SET  value = ?, timeStamp = ?, driver = ? WHERE vehicleNumber = ? AND sensor = ?");
+//                                 $result = $statement->execute(array(  $BatteryPower, date('Y-m-d H:i:s'), $username , $vehicleNumber, "BatteryPower"));
 
-                            if(!$result)
-                                {
-                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                }
+//                             if(!$result)
+//                                 {
+//                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                 }
                                 
                                 
-                                // store historical
+//                                 // store historical
                                 
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
-                                                            VALUES(?, ?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "CPUTemp", $CPUTemp, date('Y-m-d H:i:s'), $username ));
+//                                                             $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
+//                                                             VALUES(?, ?, ?, ?, ?)");
+//                                                             $result = $statement->execute(array( $vehicleNumber, "CPUTemp", $CPUTemp, date('Y-m-d H:i:s'), $username ));
                                 
-                                                            if(!$result)
-                                                                {
-                                                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                                                    $answer.= $result;
-                                                                }
+//                                                             if(!$result)
+//                                                                 {
+//                                                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                                                     $answer.= $result;
+//                                                                 }
                                 
-                                                            //jitter
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
-                                                            VALUES(?, ?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "jitter", $jitter, date('Y-m-d H:i:s'), $username ));
+//                                                             //jitter
+//                                                             $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+//                                                             VALUES(?, ?, ?, ?, ?)");
+//                                                             $result = $statement->execute(array( $vehicleNumber, "jitter", $jitter, date('Y-m-d H:i:s'), $username ));
                                 
-                                                            if(!$result)
-                                                                {
-                                                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                                                }
+//                                                             if(!$result)
+//                                                                 {
+//                                                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                                                 }
                                 
-                                                            //numOfRTThreads
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
-                                                            VALUES(?, ?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "numOfRTThreads", $numOfRTThreads, date('Y-m-d H:i:s'), $username ));
+//                                                             //numOfRTThreads
+//                                                             $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+//                                                             VALUES(?, ?, ?, ?, ?)");
+//                                                             $result = $statement->execute(array( $vehicleNumber, "numOfRTThreads", $numOfRTThreads, date('Y-m-d H:i:s'), $username ));
                                 
-                                                            if(!$result)
-                                                                {
-                                                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                                                }
+//                                                             if(!$result)
+//                                                                 {
+//                                                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                                                 }
                                 
-                                                            //LIDAR
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
-                                                            VALUES(?, ?, ?, ?, ?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "LIDAR", $LIDAR, date('Y-m-d H:i:s'), $username ));
+//                                                             //LIDAR
+//                                                             $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp, driver)
+//                                                             VALUES(?, ?, ?, ?, ?)");
+//                                                             $result = $statement->execute(array( $vehicleNumber, "LIDAR", $LIDAR, date('Y-m-d H:i:s'), $username ));
                                 
-                                                            if(!$result)
-                                                                {
-                                                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                                                }
+//                                                             if(!$result)
+//                                                                 {
+//                                                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                                                 }
                                 
-                                                            //Speed
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
-                                                            VALUES(?, ?, ?, ?,?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "Speed", $Speed, date('Y-m-d H:i:s'), $username ));
+//                                                             //Speed
+//                                                             $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+//                                                             VALUES(?, ?, ?, ?,?)");
+//                                                             $result = $statement->execute(array( $vehicleNumber, "Speed", $Speed, date('Y-m-d H:i:s'), $username ));
                                 
-                                                            if(!$result)
-                                                                {
-                                                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                                                }
+//                                                             if(!$result)
+//                                                                 {
+//                                                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                                                 }
                                 
-                                                            //BatteryPower
-                                                            $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
-                                                            VALUES(?, ?, ?, ?,?)");
-                                                            $result = $statement->execute(array( $vehicleNumber, "BatteryPower", $BatteryPower, date('Y-m-d H:i:s'), $username ));
+//                                                             //BatteryPower
+//                                                             $statement = $this->pdo->prepare("INSERT INTO vehiclehistoricaldata(vehicleNumber, sensor, value, timeStamp,driver)
+//                                                             VALUES(?, ?, ?, ?,?)");
+//                                                             $result = $statement->execute(array( $vehicleNumber, "BatteryPower", $BatteryPower, date('Y-m-d H:i:s'), $username ));
                                 
-                                                            if(!$result)
-                                                                {
-                                                                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-                                                                }
+//                                                             if(!$result)
+//                                                                 {
+//                                                                     $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+//                                                                 }
                                 
                                 
                                 
@@ -286,20 +347,7 @@ class VehicleDataModel
         return $data;
         
     }
-        
-    public function setCurrentDriver($vehicleNumber, $username)
-    {
-        
-        
-        
-        
-    }
-    
-    public function getVehicleNumber($username)
-    {     
-        
-        
-    }
+          
     
     public function registerNewVehicle($vehicleNumber)
     {
@@ -340,63 +388,8 @@ class VehicleDataModel
         {
         $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor)
                                                             VALUES(?, ?)");
-        $result = $statement->execute(array( $vehicleNumber, "CPUTemp"));
+        $result = $statement->execute(array( $vehicleNumber, "no Sensordata yet"));
         
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-            $answer.= $result;
-        }
-        
-        //jitter
-        $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor)
-                                                            VALUES(?, ?)");
-        $result = $statement->execute(array( $vehicleNumber, "jitter"));
-        
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-        }
-        
-        //numOfRTThreads
-        $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor)
-                                                            VALUES(?, ?)");
-        $result = $statement->execute(array( $vehicleNumber, "numOfRTThreads"));
-        
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-        }
-        
-        //LIDAR
-        $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor)
-                                                            VALUES(?, ?)");
-        $result = $statement->execute(array( $vehicleNumber, "LIDAR"));
-        
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-        }
-        
-        //Speed
-        $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor)
-                                                            VALUES(?, ?)");
-        $result = $statement->execute(array( $vehicleNumber, "Speed"));
-        
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-        }
-        
-        //BatteryPower
-        $statement = $this->pdo->prepare("INSERT INTO vehiclecurrentdata(vehicleNumber, sensor)
-                                                            VALUES(?, ?)");
-        $result = $statement->execute(array( $vehicleNumber, "BatteryPower"));
-        
-        if(!$result)
-        {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
-        }
         
         $answer .= '<div id="signupsucess">Vehicle registered</a>';
         

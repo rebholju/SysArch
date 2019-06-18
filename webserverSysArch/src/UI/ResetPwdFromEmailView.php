@@ -5,8 +5,7 @@ class ResetPwdFromEmailView extends View
     protected function generateContent()
     {
         
-        echo '  
-    </div>
+        echo '     
     <div id="login">
     <form action="?command=resetpwdfromemail" method="post">
     <input type="email" name="email" placeholder="E-Mail"><br />

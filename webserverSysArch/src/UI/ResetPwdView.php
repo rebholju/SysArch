@@ -6,7 +6,6 @@ class ResetPwdView extends View
     {
         
         echo '
-            </div>
             <div id="login">
             <form action="?command=resetpwd" method="post">
 	        <input type="email" name="email" placeholder="E-Mail"><br />

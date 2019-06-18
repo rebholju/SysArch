@@ -15,11 +15,13 @@ class UserDataModel
         $result = $statement->execute(array('username' => $username_email));
         $user = $statement->fetch();
         
-        if($user === false)
+        if($user == false)
         {
             $statement = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
             $result = $statement->execute(array('email' => $username_email));
             $user = $statement->fetch();
+            
+            
         }
         
         //Überprüfung des Passworts
@@ -122,9 +124,6 @@ class UserDataModel
         {    if(isset($_GET['command']))
         {
             $answer ="";
-//             $email = $_POST['email'];
-//             $resetpwd = $_POST['resetpwd'];
-//             $newpwd = $_POST['newpwd'];
             
             $statement = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
             $result = $statement->execute(array('email' => $email));
@@ -156,8 +155,8 @@ class UserDataModel
                         $result = $statement->execute(array($hashedPwd, $email));
                         if($result)
                         {
-                            $answer .= '<div id="#signupsucess">password resetted <br><div/>
-                            <div>
+                            $answer .= '<div id="signupsucess">password resetted <br>
+                            
                             <form action="?command=logout" method="post">
                             <button type="submit" class="buttondesign" >Home</button>
                             ';
@@ -190,7 +189,6 @@ class UserDataModel
         {
             
                 $answer="";
-      //          $email = $_POST['email'];
                 
                 $statement = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
                 $result = $statement->execute(array('email' => $email));
@@ -223,24 +221,49 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             
     }
 
-    public function authetficateDriver($rfidID)
+    public function authetficateDriver($JSON)
     {
+        
+        $data = json_decode($JSON, true);
+        
+        $rfidID = $data['id'];
         
         $statement = $this->pdo->prepare("SELECT username FROM users WHERE rfidID = :rfidID");
         $result = $statement->execute(array('rfidID' => $rfidID));
         $user = $statement->fetch();
         
-        //Überprüfung des Passworts
         if ($user) {
             return $user['username'];
+            
+            //JSON File generieren
+            //return $returnJSON        
+            
+        } else {
+            return false;         
+        }
+    }
+    
+    
+    // Hier bearebiten
+    public function logoutDriver()
+    {
+        $data = json_decode($JSON, true);
+        
+        $rfidID = $data['id'];
+        
+        
+        $statement = $this->pdo->prepare("DELETE driver FROM vehiclecurrentdata WHERE rfidID = :rfidID");
+        $result = $statement->execute(array('rfidID' => $rfidID));
+        $user = $statement->fetch();
+        
+        if ($user) {
+            return $user['username'];
+            
+            //JSON File generieren
+            //return $returnJSON
+            
         } else {
             return false;
-//             $Message = MessageHandler::getInstance();
-//             $Message->AddMessage('<div id="loginfalse">E-Mail/Benutzernamer oder Passwort ungueltig<br>
-//                         </form>
-//                         <form action="?command=resetpwdView" method="post">
-//                         <button type="submit" class="buttondesign">Reset Password</button>
-//                     </div>');           
         }
     }
         

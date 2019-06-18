@@ -9,6 +9,7 @@ class HistoricalDataView extends View
         $user = new UserController();
         echo'
         
+
 <table id="HistoricalDataTable">
   <tr>
     <th onclick="sortNumber(0)">Car</th>
@@ -17,9 +18,11 @@ class HistoricalDataView extends View
     <th onclick="sortNumber(3)">timestemp</th>';
     if($user->getRole()==10)
     {
-    echo'<th onclick="sortNumber(4)">Driver</th>';
+    echo'
+    <th onclick="sortNumber(4)">Driver</th>';
     }
     echo'
+
   </tr>';
         for($i=0;$i<sizeof($data);$i++)
         {

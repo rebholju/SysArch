@@ -23,8 +23,8 @@
 	require_once('src/UI/OptionsView.php');
 	
 	
-// 	$refcontorller = new VehicleDataController();
-// 	$refcontorller->setVehicleData("test");
+//  	$refcontorller = new VehicleDataController();
+//  	$refcontorller->setVehicleData("test");
 	
 	
 	main();
@@ -105,14 +105,15 @@
 	
 	function resetpwd2($command)
 	{
+	    $refUserController = new UserController();
+	    
 	    if($command == "resetpwdView" || $command == "resetpwd")
 	    {
 
 	    	    
         if($command == "resetpwd")
 	    {
-	        $pdo = new UserDataModel();
-	        $pdo->resetpwdrequest();
+	        $refUserController->resetpasswordrequest();
 	        
 	    }
 	    $view = new ResetPwdView(TRUE);
@@ -123,8 +124,8 @@
 	    {
 	     if($command == "resetpwdfromemail")
 	     {
-	         $pdo = new UserDataModel();
-	         $pdo->resetpwd();
+	         
+	         $refUserController->resetpasswordbyEmail();
 
 	     }
 	     $view = new ResetPwdFromEmailView();

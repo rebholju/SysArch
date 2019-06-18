@@ -71,5 +71,19 @@
             return $userdata;
         }
         
+        public function resetpasswordrequest()
+        {
+            $email = $_POST['email'];
+            $this->refCurrentUserDataModel->resetpwdrequest($email);
+        }
+        
+        public function resetpasswordbyEmail()
+        {
+             $email = $_POST['email'];
+            $resetpwd = $_POST['resetpwd'];
+            $newpwd = $_POST['newpwd'];
+            $this->refCurrentUserDataModel->resetpwd($email, $resetpwd, $newpwd);
+        }
+        
 
     }
