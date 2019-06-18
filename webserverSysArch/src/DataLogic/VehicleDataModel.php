@@ -26,7 +26,7 @@ class VehicleDataModel
                $value = $data['Sensors'][$i]['value'];
                $state = $data['Sensors'][$i]['state'];
                $unit = $data['Sensors'][$i]['unit'];
-               $timestamp = $data['Sensors'][$i]['timestamp'];  // timestamp noch in richtiges format dann wieder umkehren
+               $timestamp = $data['Sensors'][$i]['timestamp'];  // timestamp noch in richtiges format dann wieder umkehren ISO 8601
                
                
                if($state=='ON')
