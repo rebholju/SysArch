@@ -47,6 +47,14 @@ abstract class View
                         <a id="blue" href="index.php?command=OptionsView">Options</a>
                         </div>';
                 }
+                else
+                {
+                    echo'</div>';
+                }
+        } 
+        else
+        {
+            echo'</div>';
         }
                 
                 

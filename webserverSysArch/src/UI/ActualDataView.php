@@ -20,7 +20,8 @@ echo'
     <th onclick="sortName(3)">timestemp</th>';
     if($user->getRole()==10)
     {
-    echo'<th onclick="sortName(4)">Driver</th>';
+    echo'
+    <th onclick="sortName(4)">Driver</th>';
     }
     echo'
   
