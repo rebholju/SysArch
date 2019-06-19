@@ -5,8 +5,14 @@ class VehicleDataModel
     private $pdo;
     public function __construct()
     {
-        // Hier Datenbank adresse eintragen auf ea-pc165
-        $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
+//         $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306 dbname=sysarch_w4';
+//          // server=ea-pc165.ei.htwg-konstanz.de;
+//         $dbuser = 'sysarch_w4';
+//         $dbpwd = 'DEF';
+//         //
+//         // Hier Datenbank adresse eintragen auf ea-pc165
+            $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
+//        $this->pdo = new PDO($dsn, $dbuser, $dbpwd);
     }
    
     //sets the Values given in the JSON file into the current DB and historical DB
