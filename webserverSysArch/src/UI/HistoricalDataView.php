@@ -1,3 +1,4 @@
+
 <?php
 
 class HistoricalDataView extends View
@@ -7,61 +8,132 @@ class HistoricalDataView extends View
         $refVehicleDataController = new VehicleDataController();
         $data = $refVehicleDataController->getHistoricalData();
         $user = new UserController();
+        $test =false;
         echo'
         
-
 <table id="HistoricalDataTable">
   <tr>
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortNumber(3)">timestemp</th>';
+    <th onclick="sortName(3)">timestemp</th>';
     if($user->getRole()==10)
     {
-    echo'
-    <th onclick="sortNumber(4)">Driver</th>';
+    echo'<th onclick="sortNumber(4)">Driver</th>';
     }
     echo'
 
+
   </tr>';
+    echo '
+
+<br></br>
+<br></br>
+
+
+
+<form  action="" method="post">
+   <input type="submit" name="lidar" value="LIDAR"/>
+</form>
+<form action="" method="post">
+   <input type="submit" name="cpuTemp" value="CPU"/>
+</form>
+<form action="" method="post">
+   <input type="submit" name="Speed" value="Speed"/>
+</form>
+<form action="" method="post">
+   <input type="submit" name="jitter" value="Jitter"/>
+</form>
+<form action="" method="post">
+   <input type="submit" name="numOfRTThreads" value="Threads"/>
+</form>
+<form action="" method="post">
+   <input type="submit" name="BatteryPower" value="Battery"/>
+</form>
+<form action="" method="post">
+   <input type="submit" name="Showall" value="Show-all"/>
+</form>
+
+
+</div>';
+    
+    
+   
+    
+    
+
+    if(isset($_POST["lidar"])) {
+        $test='LIDAR';
+    }
+    else if (isset($_POST["cpuTemp"])){
+        $test='CPUTemp';
+    }
+    else if (isset($_POST["Speed"])){
+        $test='Speed';
+    }
+    else if (isset($_POST["jitter"])){
+        $test='jitter';
+    }
+    else if (isset($_POST["numOfRTThreads"])){
+        $test='numOfRTThreads';
+    }
+    else if (isset($_POST["BatteryPower"])){
+        $test='BatteryPower';
+    }
+    else if (isset($_POST["Showall"])){
+        $test='Showa';
+               
+    }
+   if( ! isset($_GET['test']))
+   {
         for($i=0;$i<sizeof($data);$i++)
         {
-            echo '<tr><td>';
-            
-            echo $data[$i]['vehicleNumber'];
-            
-            echo'</td><td>';
-            
-            echo $data[$i]['sensor'];
-            
-            echo'</td><td>';
-            
-            echo $data[$i]['value'];
-            
-            echo '</td><td>';
-            
-            echo $data[$i]['timeStamp'];
-            
-            echo '</td>';
-            if($user->getRole()==10)
-            {   echo'<td>';
+            if($data[$i]['sensor']== $test |$test=='Showa')
+            {
+                echo '<tr><td>';
+                
+                echo $data[$i]['vehicleNumber'];
+                
+                echo'</td><td>';
+                
+                echo $data[$i]['sensor'];
+                
+                echo'</td><td>';
+                
+                echo $data[$i]['value'];
+                
+                echo '</td><td>';
+                
+                echo $data[$i]['timeStamp'];
+                
+                echo '</td>';
+                if($user->getRole()==10)
+                {   echo'<td>';
                 echo $data[$i]['driver'];
                 echo'</td></tr>';
+                }
+                else
+                {
+                    echo '</tr>';
+                }
             }
-            else 
-            {
-                echo '</tr>';
+            
             }
         }
+          
+    
+ 
+    
+            
         echo'
 </table>';
           
         
         echo'
             
+         
             
-            
-            
+        
             
             
             
