@@ -39,6 +39,15 @@ h1{
 		
 }
 
+#historicalbutton{
+	
+     float: left;
+     width: 13.9%;
+     padding: 2px;
+     background: #80ff80;
+     box-sizing: border-box;
+}
+
 
 body{
   margin:0px;

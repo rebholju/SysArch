@@ -9,8 +9,58 @@ class HistoricalDataView extends View
         $data = $refVehicleDataController->getHistoricalData();
         $user = new UserController();
         $test =false;
-        echo'
         
+        echo '
+    </div>
+    <br></br>
+<br></br>
+
+<b>Select a Sensor!</b
+
+<br></br>
+    <div id="historicalbutton">
+            <form  action="" method="post">
+            <input type="submit" name="lidar" value="LIDAR"/>
+            </form>
+     </div>
+
+    <div id="historicalbutton">
+            <form action="" method="post">
+           <input type="submit" name="cpuTemp" value="CPU"/>
+            </form>
+     </div>
+
+      <div id="historicalbutton">
+        <form action="" method="post">
+           <input type="submit" name="Speed" value="Speed"/>
+        </form>
+      </div>
+
+        <div id="historicalbutton">
+        <form action="" method="post">
+           <input type="submit" name="jitter" value="Jitter"/>
+        </form>
+       </div>
+
+        <div id="historicalbutton">
+        <form action="" method="post">
+           <input type="submit" name="numOfRTThreads" value="Threads"/>
+        </form>
+        </div>
+
+        <div id="historicalbutton">
+        <form action="" method="post">
+           <input type="submit" name="BatteryPower" value="Battery"/>
+        </form>
+        </div>
+
+        <div id="historicalbutton">
+        <form action="" method="post">
+           <input type="submit" name="Showall" value="ALL_DATA"/>
+        </form>
+        </div>
+
+    
 <table id="HistoricalDataTable">
   <tr>
     <th onclick="sortNumber(0)">Car</th>
@@ -28,31 +78,10 @@ class HistoricalDataView extends View
     echo '
 
 <br></br>
-<br></br>
 
 
 
-<form  action="" method="post">
-   <input type="submit" name="lidar" value="LIDAR"/>
-</form>
-<form action="" method="post">
-   <input type="submit" name="cpuTemp" value="CPU"/>
-</form>
-<form action="" method="post">
-   <input type="submit" name="Speed" value="Speed"/>
-</form>
-<form action="" method="post">
-   <input type="submit" name="jitter" value="Jitter"/>
-</form>
-<form action="" method="post">
-   <input type="submit" name="numOfRTThreads" value="Threads"/>
-</form>
-<form action="" method="post">
-   <input type="submit" name="BatteryPower" value="Battery"/>
-</form>
-<form action="" method="post">
-   <input type="submit" name="Showall" value="Show-all"/>
-</form>
+
 
 
 </div>';
