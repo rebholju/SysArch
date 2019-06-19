@@ -25,10 +25,18 @@ h1{
 
 #login{
 	
-	text-align: left;
+	text-align: center;
 	line-height: 2; 
+		
+}
+#editUser{
 	
-	
+     float: left;
+     width: 33.33333%;
+     padding: 20px;
+     background: #eee;
+     box-sizing: border-box;
+		
 }
 
 

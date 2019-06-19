@@ -68,11 +68,13 @@ class OptionsView extends View
     <td>';
             echo '<a href="index.php?command=DeleteUser">Delete</a>';
             echo $i;
+            echo $userdata[$i]['username'];
             echo'</td>
 
     <td>';
             echo '<a href="index.php?command=EditUserView">EditUser</a>';
             echo $i;
+            echo $userdata[$i]['username'];
             echo'</td>
 
 

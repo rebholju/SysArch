@@ -14,7 +14,12 @@ echo'
 
   <div class="center">
 Always a good ride :) 
+<br></br>
+<br></br>
+<a href="index.php?command=EditUserView">EditUser</a>
 </div>   
+
+
         </div>
         
         
