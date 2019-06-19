@@ -21,6 +21,7 @@
 	require_once('src/UI/HistoricalDataView.php');
 	require_once('src/UI/ActualDataView.php');
 	require_once('src/UI/OptionsView.php');
+	require_once('src/UI/EditUserView.php');
 	
 	
 //  	$refcontorller = new VehicleDataController();

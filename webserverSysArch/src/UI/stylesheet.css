@@ -1,3 +1,7 @@
+
+
+
+
 h1{
 	font-size: 2em;
 	text-align: center;
@@ -21,8 +25,9 @@ h1{
 
 #login{
 	
-	text-align: center;
+	text-align: left;
 	line-height: 2; 
+	
 	
 }
 
@@ -72,8 +77,13 @@ body{
   color: #192a56;
 }
 
-
-
+#box {
+     float: left;
+     width: 33.33333%;
+     padding: 20px;
+     background: #eee;
+     box-sizing: border-box;
+}
 #head button {
   border: none;
   cursor: pointer;
@@ -207,3 +217,5 @@ background-color: #dfd;
   padding: 15px;
   text-align: center;
 }
+
+

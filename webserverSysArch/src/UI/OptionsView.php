@@ -18,7 +18,10 @@ class OptionsView extends View
                </form>
                <br>
                <br>
-               <br>      
+               <br>  
+
+
+    
                <form action="?command=SignupView" method="post">
                <button type="submit" class="buttondesign">Signup new User</button>
                </form>
@@ -63,17 +66,13 @@ class OptionsView extends View
             echo'</td>
 
     <td>';
-            echo ' <form action="?command=DeleteUser" method="post">
-               <button type="submit">Delete User</button>
-               </form>';
-            
+            echo '<a href="index.php?command=DeleteUser">Delete</a>';
+            echo $i;
             echo'</td>
 
     <td>';
-            echo '<form action="?command=EditUser" method="post">
-               <button type="submit">Edit User[$i]</button>
-               </form>';
-            
+            echo '<a href="index.php?command=EditUserView">EditUser</a>';
+            echo $i;
             echo'</td>
 
 

@@ -41,6 +41,12 @@ class CommandInterpreter
             $view = new OptionsView();
             $view->generatePage();
         }
+        
+        elseif($command=="EditUserView" && $role == 10)
+        {
+            $view = new EditUserView();
+            $view->generatePage();
+        }
         elseif($command == "Signup" && $role == 10)
         {
            $user = new UserController();
