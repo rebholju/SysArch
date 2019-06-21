@@ -47,12 +47,13 @@
             $firstname = $_POST['firstname'];
             $email = $_POST['email'];
             $lastname = $_POST['lastname'];
-            
             $username = $_POST['username'];
             $pwd = $_POST['pwd'];
             $rfidID = $_POST['rfidID'];
             
-            $this->refCurrentUserDataModel->signupUser($firstname, $lastname, $email, $username, $pwd, $rfidID);
+           $success = $this->refCurrentUserDataModel->signupUser($firstname, $lastname, $email, $username, $pwd, $rfidID);
+           
+           return $success;
         }
         
         //get Role
@@ -67,8 +68,20 @@
         //get Userdata
         public function getAllUserData()
         {
-            $userdata = $this->refCurrentUserDataModel->getUserData();
-            return $userdata;
+            $refUserController = new UserController();
+            
+            if($refUserController->getRole()==10 && ($_GET['command']=='OptionsView' ||
+                $_GET['command']=='DeleteUser' || $_GET['command'] == "Signup" || $_GET['command']=="NewVehicle"))
+            {
+                $userdata = $this->refCurrentUserDataModel->getUserData();
+                return $userdata;
+            }
+            else
+            {
+                $username = $_SESSION['username'];
+                $userdata = $this->refCurrentUserDataModel->getOwnUserData($username);
+                return $userdata;
+            }
         }
         
         public function resetpasswordrequest()
@@ -83,6 +96,27 @@
             $resetpwd = $_POST['resetpwd'];
             $newpwd = $_POST['newpwd'];
             $this->refCurrentUserDataModel->resetpwd($email, $resetpwd, $newpwd);
+        }
+        
+        public function deleteUser()
+        {
+            $userId= $_GET['number'];
+            $this->refCurrentUserDataModel->deleteUserfromDatabase($userId);
+            
+        }
+        
+        public function editUser()
+        {
+            $firstname = $_POST['firstname'];
+            $email = $_POST['email'];
+            $lastname = $_POST['lastname'];
+            $username = $_POST['username'];
+            $oldpwd = $_POST['oldpwd'];
+            $newpwd = $_POST['newpwd'];
+            $rfidID = $_POST['rfidID'];
+            $userId = $_GET['number'];
+            
+            $this->refCurrentUserDataModel->editUserinDatabase($firstname, $lastname, $email, $username, $oldpwd, $newpwd, $rfidID, $userId);
         }
         
 

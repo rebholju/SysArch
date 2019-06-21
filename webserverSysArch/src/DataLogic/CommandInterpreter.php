@@ -42,22 +42,39 @@ class CommandInterpreter
             $view->generatePage();
         }
         
-        elseif($command=="EditUserView" && $role == 10)
+        elseif($command=="EditUser")
         {
-            $view = new EditUserView();
+            $user= new UserController();
+            $user->editUser();
+            $view=new HomeView();
             $view->generatePage();
         }
         elseif($command == "Signup" && $role == 10)
         {
            $user = new UserController();
-           $user->Signup();
-           $view= new SignupView();
-           $view->generatePage();         
+          $success = $user->Signup();
+          if($success)
+          {
+           $view= new OptionsView();
+           $view->generatePage();
+          }
+          else
+          {
+              $view= new SignupView();
+              $view->generatePage();
+          }
         }
         elseif($command == "NewVehicle"  && $role == 10)
         {
             $vehicle= new VehicleDataController();
             $vehicle->newVehicle();
+            $view = new OptionsView();
+            $view->generatePage();      
+        }
+        elseif($command == "DeleteUser"  && $role == 10)
+        {
+            $user= new UserController();
+            $user->deleteUser();
             $view = new OptionsView();
             $view->generatePage();
             

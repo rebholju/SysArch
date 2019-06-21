@@ -124,6 +124,7 @@ class UserDataModel
              $Message = MessageHandler::getInstance();
              $Message->AddMessage($answer);
         }
+        return !$error;
     }
         
     public function resetpwd($email, $resetpwd, $newpwd)
@@ -320,7 +321,123 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
         
     
     
-}
 
+    public function getOwnUserData($username)
+    {
+        $counter = 0;
+        $userdata = array();
+        
+        $statement = $this->pdo->prepare("SELECT * FROM users WHERE username = :username");
+        $result = $statement->execute(array('username' => $username));
+        while ($row = $statement->fetch())
+        {
+            $userdata[] = $row;
+            $counter++;
+            
+        }
+
+        if(!$result)
+        {
+            $Message = MessageHandler::getInstance();
+            $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+        }
+        
+        return $userdata;
+    }
+    
+    public function deleteUserfromDatabase($userId)
+    {
+        $statement = $this->pdo->prepare("DELETE FROM users WHERE idUsers = ?");
+        $result = $statement->execute(array($userId));
+        
+        if(!$result)
+        {
+            $Message = MessageHandler::getInstance();
+            $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+        }
+        else
+        {
+            $Message = MessageHandler::getInstance();
+            $Message->AddMessage('<div id="signupsucess">deleted successfully<br>');
+        }
+        
+    }
+    
+    
+    public function editUserinDatabase($firstname, $lastname, $email, $username, $oldpwd, $newpwd, $rfidID, $userId)
+    {
+        $answer ='';
+        $error = false;
+        
+        if(!empty($oldpwd) && !empty($newpwd))
+        {
+            $statement = $this->pdo->prepare("SELECT * FROM users WHERE idUsers=?");
+            $result = $statement->execute(array($userId));
+            $user = $statement->fetch();
+            
+
+            //Überprüfung des Passworts
+            if ($user !== false && password_verify($oldpwd, $user['password'])) 
+            {
+                $hashedPwd = password_hash($newpwd, PASSWORD_DEFAULT);
+                
+                $statement = $this->pdo->prepare("UPDATE users SET  password=? WHERE idUsers = ? ");
+                $result = $statement->execute(array($hashedPwd, $userId));
+                
+                if($result)
+                {
+                    $answer .= '<div id="signupsucess">Changed password succesfully</a>';
+                }
+                else
+                {
+                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                }
+            }
+            else
+            {
+                $answer .= '<div id="loginfalse">Wrong old password !<br>';
+            }
+        }
+        
+        
+        if(empty($firstname)||empty($lastname)||empty($email)||empty($username)||empty($rfidID))
+        {
+            $answer .= '<div id="loginfalse">not filled out completly<br>';
+            $error = true;
+        }
+        else
+        {
+            if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+            {
+                $answer .= '<div id="loginfalse">keine gueltige E-Mail-Adresse angegeben<br>';
+                $error = true;
+            }
+            
+            if(!$error)
+            {
+                $statement = $this->pdo->prepare("UPDATE users SET  username=?, firstname=?, lastname=?, email=?, rfidID=? WHERE idUsers=? ");
+                $result = $statement->execute(array($username, $firstname, $lastname, $email, $rfidID, $userId));
+                if(!$result)
+                {
+                    $answer.='<div id="loginfalse">Failure update data<br>';
+                    $error = true;
+                }
+                else
+                {
+                    $answer .= '<div id="signupsucess">Changed Userdata successfully</a>';
+                }
+            }
+
+        
+        if(!empty($answer))
+        {
+            $answer .= '</div>';
+            $Message = MessageHandler::getInstance();
+            $Message->AddMessage($answer);
+        }
+    }
+
+}
+}
 
     

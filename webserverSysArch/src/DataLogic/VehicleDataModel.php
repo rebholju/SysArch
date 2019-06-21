@@ -37,8 +37,7 @@ class VehicleDataModel
                
                if($state=='ON')
                {
-                   $statement = $this->pdo->prepare("SELECT sensor FROM vehiclehistoricaldata WHERE vehicleNumber = :vehicleNumber AND sensor = :name)
-                   VALUES(?, ?, ?, ?, ?)");
+                   $statement = $this->pdo->prepare("SELECT sensor FROM vehiclehistoricaldata WHERE vehicleNumber = :vehicleNumber AND sensor = :name");
                    $result = $statement->execute(array( $vehicleNumber, $name));
                    if($result)
                    {

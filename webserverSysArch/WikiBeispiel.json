@@ -20,15 +20,11 @@
                            "state" : "ON",
                            "timestamp" : "20190607T134601Z"
                            }],
-"Passengers" : [
+"Passengers" : 
                           {"name":"Driver",
                            "isPresent":"true",
                            "timeStamp":"20190607T134601Z"
-                          },
-                          {"name":"front-seat passenger",
-                          "isPresent":"true",
-                          "timeStamp":"20190607T134601Z"
-                          }],
+                          }
 "lidar" : {
               "angleValue" :"45",
               "angleUnit" : "C",

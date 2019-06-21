@@ -33,10 +33,10 @@ class OptionsView extends View
                 <th onclick="sortName(0)">Username</th>
                 <th onclick="sortName(1)">Firstname</th>
                 <th onclick="sortName(2)">Lastname</th>
-                <th onclick="sortName(3)">E-Mail</th>
-                <th onclick="sortName(4)">Last Login</th>
+                <th onclick="sortName(4)">E-Mail</th>
+                <th onclick="sortName(3)">RFID ID</th>
+                <th onclick="sortName(5)">Last Login</th>
                 <th>Delete User</th>
-                <th>Edit User</th>
                             
                 </tr>';
         
@@ -44,43 +44,32 @@ class OptionsView extends View
         {
             echo '<tr><td>';
             echo $userdata[$i]['username'];
-            
-            
-            echo'</td>
-    <td>';
+            echo'</td><td>';
             
             echo $userdata[$i]['firstname'];
-            
-            echo'</td>
-    <td>';
+            echo'</td><td>';
             
             echo $userdata[$i]['lastname'];
-            echo '</td>
-    <td>';
+            echo '</td><td>';
+            
             echo $userdata[$i]['email'];
+            echo'</td><td>';
             
-            echo'</td>
-    <td>';
+            echo $userdata[$i]['rfidID'];
+            echo'</td> <td>';
+            
             echo $userdata[$i]['lastlogin'];
+            echo'</td> <td>';
             
-            echo'</td>
-
-    <td>';
-            echo '<a href="index.php?command=DeleteUser">Delete</a>';
-            echo $i;
-            echo $userdata[$i]['username'];
-            echo'</td>
-
-    <td>';
-            echo '<a href="index.php?command=EditUserView">EditUser</a>';
-            echo $i;
-            echo $userdata[$i]['username'];
-            echo'</td>
-
-
-
-
-  </tr>';
+            echo'              
+                <div id="login">
+               <form action="?command=DeleteUser&number=';
+            echo $userdata[$i]['idUsers'];
+                echo'" method="post" >
+               <button type="submit" class="buttondesign">Delete User</button>
+               </form>
+                </div>';
+            echo'</td></tr>';
         }
         echo'
 </table>';

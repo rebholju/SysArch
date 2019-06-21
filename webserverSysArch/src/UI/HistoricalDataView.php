@@ -8,7 +8,7 @@ class HistoricalDataView extends View
         $refVehicleDataController = new VehicleDataController();
         $data = $refVehicleDataController->getHistoricalData();
         $user = new UserController();
-        $test =false;
+        $pressedButton ='Showa';
         
         echo '
     </div>
@@ -92,32 +92,32 @@ class HistoricalDataView extends View
     
 
     if(isset($_POST["lidar"])) {
-        $test='LIDAR';
+        $pressedButton='LIDAR';
     }
     else if (isset($_POST["cpuTemp"])){
-        $test='CPUTemp';
+        $pressedButton='CPUTemp';
     }
     else if (isset($_POST["Speed"])){
-        $test='Speed';
+        $pressedButton='Speed';
     }
     else if (isset($_POST["jitter"])){
-        $test='jitter';
+        $pressedButton='jitter';
     }
     else if (isset($_POST["numOfRTThreads"])){
-        $test='numOfRTThreads';
+        $pressedButton='numOfRTThreads';
     }
     else if (isset($_POST["BatteryPower"])){
-        $test='BatteryPower';
+        $pressedButton='BatteryPower';
     }
     else if (isset($_POST["Showall"])){
-        $test='Showa';
+        $pressedButton='Showa';
                
     }
    if( ! isset($_GET['test']))
    {
         for($i=0;$i<sizeof($data);$i++)
         {
-            if($data[$i]['sensor']== $test |$test=='Showa')
+            if($data[$i]['sensor']== $pressedButton || $pressedButton=='Showa')
             {
                 echo '<tr><td>';
                 
