@@ -49,6 +49,11 @@ class CommandInterpreter
             $view=new HomeView();
             $view->generatePage();
         }
+        elseif($command == "ChangeSensor")
+        {
+            $view=new HistoricalDataView();
+            $view->generatePage();
+        }
         elseif($command == "Signup" && $role == 10)
         {
            $user = new UserController();

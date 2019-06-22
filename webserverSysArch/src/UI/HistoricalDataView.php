@@ -8,65 +8,61 @@ class HistoricalDataView extends View
         $refVehicleDataController = new VehicleDataController();
         $data = $refVehicleDataController->getHistoricalData();
         $user = new UserController();
-        $pressedButton ='Showa';
+        $pressedButton ='Showall';
         
+        $sensornames = array();
+        
+        for($i=0;$i<sizeof($data);$i++)
+        {
+            $counter = 0;
+            
+            for($u=0;$u<sizeof($sensornames);$u++)
+            {
+                if($sensornames[$u] == $data[$i]['sensor'])
+                {
+                    $counter++;
+                }
+            }
+            
+            if($counter==0)
+            {
+                $sensornames[sizeof($sensornames)]=$data[$i]['sensor'];
+            }
+        }
+
         echo '
-    </div>
-    <br></br>
-<br></br>
+            </div><br></br><br></br>';
+      
+        echo'
+            <div id="login">      
+            <div class="dropdown">
+            <button class="dropbtn">Select a Sensor!</button>
+            <div class="dropdown-content">';
+        
+        echo '<a href="index.php?command=ChangeSensor&Showall=1">Show All</a>';
+        
+        for($u=0;$u<sizeof($sensornames);$u++)
+        {
+            
+            echo ' <a href="index.php?command=ChangeSensor&';
+            echo $sensornames[$u];
+            echo'=1">';
+            echo $sensornames[$u];
+            echo'</a>';
+        }
+        echo'</div></div></div>';
 
-<b>Select a Sensor!</b
+        
 
-<br></br>
-    <div id="historicalbutton">
-            <form  action="" method="post">
-            <input type="submit" name="lidar" value="LIDAR"/>
-            </form>
-     </div>
 
-    <div id="historicalbutton">
-            <form action="" method="post">
-           <input type="submit" name="cpuTemp" value="CPU"/>
-            </form>
-     </div>
-
-      <div id="historicalbutton">
-        <form action="" method="post">
-           <input type="submit" name="Speed" value="Speed"/>
-        </form>
-      </div>
-
-        <div id="historicalbutton">
-        <form action="" method="post">
-           <input type="submit" name="jitter" value="Jitter"/>
-        </form>
-       </div>
-
-        <div id="historicalbutton">
-        <form action="" method="post">
-           <input type="submit" name="numOfRTThreads" value="Threads"/>
-        </form>
-        </div>
-
-        <div id="historicalbutton">
-        <form action="" method="post">
-           <input type="submit" name="BatteryPower" value="Battery"/>
-        </form>
-        </div>
-
-        <div id="historicalbutton">
-        <form action="" method="post">
-           <input type="submit" name="Showall" value="ALL_DATA"/>
-        </form>
-        </div>
-
+echo'
     
 <table id="HistoricalDataTable">
   <tr>
     <th onclick="sortNumber(0)">Car</th>
     <th onclick="sortName(1)">Sensorname</th>
     <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortName(3)">timestemp</th>';
+    <th onclick="sortName(3)">timestamp</th>';
     if($user->getRole()==10)
     {
     echo'<th onclick="sortNumber(4)">Driver</th>';
@@ -74,50 +70,32 @@ class HistoricalDataView extends View
     echo'
 
 
-  </tr>';
-    echo '
+    </tr>';
+    echo '<br></br></div>';
 
-<br></br>
-
-
-
-
-
-
-</div>';
+    for($u=0;$u<sizeof($sensornames);$u++)
+    {
+            
+        if(isset($_GET[$sensornames[$u]])) 
+        {
+            $pressedButton=$sensornames[$u];
+        }
+        else if (isset($_GET["Showall"]))
+        {
+            $pressedButton='Showall';           
+        }
+    }
     
     
-   
+
+        
+    
     
     
 
-    if(isset($_POST["lidar"])) {
-        $pressedButton='LIDAR';
-    }
-    else if (isset($_POST["cpuTemp"])){
-        $pressedButton='CPUTemp';
-    }
-    else if (isset($_POST["Speed"])){
-        $pressedButton='Speed';
-    }
-    else if (isset($_POST["jitter"])){
-        $pressedButton='jitter';
-    }
-    else if (isset($_POST["numOfRTThreads"])){
-        $pressedButton='numOfRTThreads';
-    }
-    else if (isset($_POST["BatteryPower"])){
-        $pressedButton='BatteryPower';
-    }
-    else if (isset($_POST["Showall"])){
-        $pressedButton='Showa';
-               
-    }
-   if( ! isset($_GET['test']))
-   {
         for($i=0;$i<sizeof($data);$i++)
         {
-            if($data[$i]['sensor']== $pressedButton || $pressedButton=='Showa')
+            if($data[$i]['sensor']== $pressedButton || $pressedButton=='Showall')
             {
                 echo '<tr><td>';
                 
@@ -148,7 +126,7 @@ class HistoricalDataView extends View
             }
             
             }
-        }
+        
           
     
  
