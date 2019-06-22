@@ -40,6 +40,7 @@ abstract class View
                     <a id="red" href="index.php?command=HomeView">Home</a>
                     <a id="orange" href="index.php?command=HistoricalDataView">HistoricalData</a>
                     <a id="green" href="index.php?command=ActualDataView">ActualData</a>';
+               
                 $user = new UserController();
                 if($user->getRole()==10)
                 {
