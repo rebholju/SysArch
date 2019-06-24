@@ -30,12 +30,12 @@ class OptionsView extends View
         echo'
                 <table id="ActualDataTable">
                 <tr>
-                <th onclick="sortName(0)">Username</th>
-                <th onclick="sortName(1)">Firstname</th>
-                <th onclick="sortName(2)">Lastname</th>
-                <th onclick="sortName(3)">E-Mail</th>
-                <th onclick="sortNumber(4)">RFID ID</th>
-                <th onclick="sortName(5)">Last Login</th>
+                <th onclick="sortName(0)">Username &#8595&#8593</th>
+                <th onclick="sortName(1)">Firstname &#8595&#8593</th>
+                <th onclick="sortName(2)">Lastname &#8595&#8593</th>
+                <th onclick="sortName(3)">E-Mail &#8595&#8593</th>
+                <th onclick="sortNumber(4)">RFID ID &#8595&#8593</th>
+                <th onclick="sortName(5)">Last Login &#8595&#8593</th>
                 <th>Delete User</th>
                             
                 </tr>';
