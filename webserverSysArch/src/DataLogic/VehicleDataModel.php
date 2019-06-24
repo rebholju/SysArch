@@ -47,7 +47,7 @@ class VehicleDataModel
                        
                        if(!$result)
                        {
-                           $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern der aktuellen Daten passiert !<br>';
+                           $answer .= '<div id="loginfalse">Failure when update sensordata!<br>';
                            $answer.= $result;
                        }
                    }
@@ -59,7 +59,7 @@ class VehicleDataModel
                        
                        if(!$result)
                        {
-                           $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                           $answer .= '<div id="loginfalse">Failure when saving new sensordata!<br>';
                            $answer.= $result;
                        }
                    }
@@ -75,7 +75,7 @@ class VehicleDataModel
                    
                    if(!$result)
                    {
-                   $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                   $answer .= '<div id="loginfalse">Failure when saving new sensordata!<br>';
                    $answer.= $result;
                    }
                    
@@ -222,7 +222,7 @@ class VehicleDataModel
                                 
                             
                     
-                         $answer .= '<div id="signupsucess">Programm ausgefuehrt</a>';
+                        // $answer .= '<div id="signupsucess">Programm ausgefuehrt</a>';
             
             
             if(!empty($answer))
@@ -246,7 +246,7 @@ class VehicleDataModel
         
         if(!$result)
         {
-            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+            $answer .= '<div id="loginfalse">Failure when calling Sensordata from database<br>';
         }
         
         

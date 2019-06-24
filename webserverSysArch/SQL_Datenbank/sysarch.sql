@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 12. Jun 2019 um 22:48
--- Server-Version: 10.1.40-MariaDB
--- PHP-Version: 7.3.5
+-- Erstellungszeit: 24. Jun 2019 um 14:19
+-- Server-Version: 10.1.38-MariaDB
+-- PHP-Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -46,10 +46,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`idUsers`, `role`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`, `rfidID`) VALUES
-(14, 10, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$GLP7r3wRuh0VRRa7Ssfsfehr0/.qmHMGGbiYy3xZAVWShI7G1SLOK', '2019-06-12 22:47:18', '', 12345),
-(15, 20, 'ju721reb', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$d/l5q2XIHP1CsMkDxdslJOpPiTUZg262xavYqME1G9sR.UYM75oqW', '2019-06-12 22:47:36', '', 123),
+(14, 10, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$GLP7r3wRuh0VRRa7Ssfsfehr0/.qmHMGGbiYy3xZAVWShI7G1SLOK', '2019-06-24 12:17:21', '', 973453),
+(15, 20, 'ju721reb', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$Gm6/GPnk2S93XPLbsTpJueXPM7JMn98HRC0IHUlfUahImKtMMROMu', '2019-06-22 16:24:22', '', 123),
 (20, 20, 'HalloTest', 'asaf', 'asfasf', '1123@web.de', '$2y$10$bvgxnf5bX3ijVJbQBOStTOv1WfVqyVgLsab50O0mfIqmf01OCzkMG', '0000-00-00 00:00:00', '', 2142),
-(21, 20, 'test', 'test1', 'ttest', 'asf@gmail.com', '$2y$10$vegMpfIz4Un00vGx5YGBUuyR2hBLEOnggycZx7BpLtKNyyqIe9.mm', '2019-06-11 17:24:46', '', 213);
+(22, 20, 'awdadad', 'sdgdsf', 'eefsdf', 'sdgsdg@wesd.de', '$2y$10$Beznih6vfY2TrQlw5NXln.gO766QVMZFAqB44TB//O4LwRoUcVvIK', '0000-00-00 00:00:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -70,18 +70,23 @@ CREATE TABLE `vehiclecurrentdata` (
 --
 
 INSERT INTO `vehiclecurrentdata` (`vehicleNumber`, `sensor`, `value`, `timeStamp`, `driver`) VALUES
-(1, 'CPUTemp', '300', '2019-06-12 18:05:48', 'rebholju'),
-(1, 'jitter', '8', '2019-06-12 18:05:48', 'rebholju'),
-(1, 'numOfRTThreads', 'test', '2019-06-12 18:05:48', 'rebholju'),
-(1, 'LIDAR', '190', '2019-06-12 18:05:48', 'rebholju'),
-(1, 'Speed', '22', '2019-06-12 18:05:48', 'rebholju'),
-(1, 'BatteryPower', '11', '2019-06-12 18:05:48', 'rebholju'),
+(1, 'CPUTemp', '300', '2019-06-12 18:05:48', 'No Driver authetificated'),
+(1, 'jitter', '8', '2019-06-12 18:05:48', 'No Driver authetificated'),
+(1, 'numOfRTThreads', 'test', '2019-06-12 18:05:48', 'No Driver authetificated'),
+(1, 'LIDAR', '190', '2019-06-12 18:05:48', 'No Driver authetificated'),
+(1, 'Speed', '200', '2019-06-07 13:46:01', 'Driver'),
+(1, 'BatteryPower', '11', '2019-06-12 18:05:48', 'No Driver authetificated'),
 (2, 'CPUTemp', '300', '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'jitter', '8', '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'numOfRTThreads', 'test', '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'LIDAR', '190', '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'Speed', '22', '2019-06-12 18:02:52', 'ju721reb'),
-(2, 'BatteryPower', '11', '2019-06-12 18:02:52', 'ju721reb');
+(2, 'BatteryPower', '11', '2019-06-12 18:02:52', 'ju721reb'),
+(1, 'temperature', '100', '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', '300', '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperatures', '110', '2019-06-07 13:46:01', 'Driver'),
+(1, 'speeds', '220', '2019-06-07 13:46:01', 'Driver'),
+(1, 'humiditys', '30', '2019-06-07 13:46:01', 'Driver');
 
 -- --------------------------------------------------------
 
@@ -102,48 +107,77 @@ CREATE TABLE `vehiclehistoricaldata` (
 --
 
 INSERT INTO `vehiclehistoricaldata` (`vehicleNumber`, `sensor`, `value`, `timeStamp`, `driver`) VALUES
-(2, 'CPUTemp', 300, '2019-06-12 17:59:53', 'rebholju'),
 (2, 'jitter', 8, '2019-06-12 17:59:53', 'rebholju'),
 (2, 'numOfRTThreads', 0, '2019-06-12 17:59:53', 'rebholju'),
 (2, 'LIDAR', 190, '2019-06-12 17:59:53', 'rebholju'),
 (2, 'Speed', 22, '2019-06-12 17:59:53', 'rebholju'),
 (2, 'BatteryPower', 11, '2019-06-12 17:59:53', 'rebholju'),
-(2, 'CPUTemp', 300, '2019-06-12 18:00:33', 'rebholju'),
 (2, 'jitter', 8, '2019-06-12 18:00:33', 'rebholju'),
 (2, 'numOfRTThreads', 0, '2019-06-12 18:00:33', 'rebholju'),
 (2, 'LIDAR', 190, '2019-06-12 18:00:33', 'rebholju'),
 (2, 'Speed', 22, '2019-06-12 18:00:33', 'rebholju'),
 (2, 'BatteryPower', 11, '2019-06-12 18:00:33', 'rebholju'),
-(2, 'CPUTemp', 300, '2019-06-12 18:01:37', 'rebholju'),
 (2, 'jitter', 8, '2019-06-12 18:01:37', 'rebholju'),
 (2, 'numOfRTThreads', 0, '2019-06-12 18:01:37', 'rebholju'),
 (2, 'LIDAR', 190, '2019-06-12 18:01:37', 'rebholju'),
 (2, 'Speed', 22, '2019-06-12 18:01:37', 'rebholju'),
 (2, 'BatteryPower', 11, '2019-06-12 18:01:37', 'rebholju'),
-(2, 'CPUTemp', 300, '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'jitter', 8, '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'numOfRTThreads', 0, '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'LIDAR', 190, '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'Speed', 22, '2019-06-12 18:02:52', 'ju721reb'),
 (2, 'BatteryPower', 11, '2019-06-12 18:02:52', 'ju721reb'),
-(1, 'CPUTemp', 300, '2019-06-12 18:03:55', 'ju721reb'),
 (1, 'jitter', 8, '2019-06-12 18:03:55', 'ju721reb'),
 (1, 'numOfRTThreads', 0, '2019-06-12 18:03:55', 'ju721reb'),
 (1, 'LIDAR', 190, '2019-06-12 18:03:56', 'ju721reb'),
 (1, 'Speed', 22, '2019-06-12 18:03:56', 'ju721reb'),
 (1, 'BatteryPower', 11, '2019-06-12 18:03:56', 'ju721reb'),
-(1, 'CPUTemp', 300, '2019-06-12 18:04:59', 'ju721reb'),
 (1, 'jitter', 8, '2019-06-12 18:04:59', 'ju721reb'),
 (1, 'numOfRTThreads', 0, '2019-06-12 18:04:59', 'ju721reb'),
 (1, 'LIDAR', 190, '2019-06-12 18:04:59', 'ju721reb'),
 (1, 'Speed', 22, '2019-06-12 18:04:59', 'ju721reb'),
 (1, 'BatteryPower', 11, '2019-06-12 18:04:59', 'ju721reb'),
-(1, 'CPUTemp', 300, '2019-06-12 18:05:48', 'rebholju'),
 (1, 'jitter', 8, '2019-06-12 18:05:48', 'rebholju'),
 (1, 'numOfRTThreads', 0, '2019-06-12 18:05:48', 'rebholju'),
 (1, 'LIDAR', 190, '2019-06-12 18:05:48', 'rebholju'),
 (1, 'Speed', 22, '2019-06-12 18:05:48', 'rebholju'),
-(1, 'BatteryPower', 11, '2019-06-12 18:05:48', 'rebholju');
+(1, 'BatteryPower', 11, '2019-06-12 18:05:48', 'rebholju'),
+(1, 'temperature', 27, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 28, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 26, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperature', 27, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 28, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 26, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperature', 27, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 28, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 26, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperature', 27, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 28, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 26, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperature', 27, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 28, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 26, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperature', 100, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 200, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 300, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperature', 100, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speed', 200, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humidity', 300, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperatures', 110, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speeds', 220, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humiditys', 30, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperatures', 110, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speeds', 220, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humiditys', 30, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperatures', 110, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speeds', 220, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humiditys', 30, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperatures', 110, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speeds', 220, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humiditys', 30, '2019-06-07 13:46:01', 'Driver'),
+(1, 'temperatures', 110, '2019-06-07 13:46:01', 'Driver'),
+(1, 'speeds', 220, '2019-06-07 13:46:01', 'Driver'),
+(1, 'humiditys', 30, '2019-06-07 13:46:01', 'Driver');
 
 --
 -- Indizes der exportierten Tabellen
@@ -163,7 +197,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
