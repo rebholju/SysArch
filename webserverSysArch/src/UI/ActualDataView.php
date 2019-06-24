@@ -14,14 +14,14 @@ class ActualDataView extends View
 echo'
 <table id="ActualDataTable">
   <tr>
-    <th onclick="sortNumber(0)">Car</th>
-    <th onclick="sortName(1)">Sensorname</th>
-    <th onclick="sortNumber(2)">Value</th>
-    <th onclick="sortName(3)">timestemp</th>';
+    <th onclick="sortNumber(0)">Vehicle &#8595&#8593</th>
+    <th onclick="sortName(1)">Sensor name  &#8595&#8593</th>
+    <th onclick="sortNumber(2)">Value  &#8595&#8593</th>
+    <th onclick="sortName(3)">Timestamp  &#8595&#8593</th>';
     if($user->getRole()==10)
     {
     echo'
-    <th onclick="sortName(4)">Driver</th>';
+    <th onclick="sortName(4)">Driver  &#8595&#8593</th>';
     }
     echo'
   
