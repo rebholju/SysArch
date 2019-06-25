@@ -8,6 +8,7 @@ class VehicleDataController
         $this->refVehicleDataModel = new VehicleDataModel();
     }
     
+        // returns current Data
         public function getCurrentData()
         {
             $username = $_SESSION['username'];
@@ -25,7 +26,7 @@ class VehicleDataController
             }
         }
         
-
+        //returns historical Data
         public function getHistoricalData()
         {       
             $username = $_SESSION['username'];
@@ -43,6 +44,7 @@ class VehicleDataController
             }
         }
 
+        // not used 
         public function setVehicleData($MQTT)
         {
             //vehiclenumber kommt von Mqttprotokoll
@@ -52,6 +54,7 @@ class VehicleDataController
             $this->refVehicleDataModel->setSensorData($MQTT, $vehicleNumber);
         }
         
+        // registers new vehicle 
         public function newVehicle()
         {
             $vehicleNumber = $_POST['vehicleNumber'];

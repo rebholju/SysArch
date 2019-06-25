@@ -13,6 +13,7 @@ class ActualDataView extends View
 
 echo'
 <table id="ActualDataTable">
+<br><br>
   <tr>
     <th onclick="sortNumber(0)">Vehicle &#8595&#8593</th>
     <th onclick="sortName(1)">Sensor name &#8595&#8593</th>

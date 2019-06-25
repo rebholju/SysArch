@@ -3,6 +3,8 @@
 class VehicleDataModel
 {
     private $pdo;
+    
+    // creates a connection to the database
     public function __construct()
     {
 //         $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306 dbname=sysarch_w4';
@@ -15,7 +17,7 @@ class VehicleDataModel
 //        $this->pdo = new PDO($dsn, $dbuser, $dbpwd);
     }
    
-    //sets the Values given in the JSON file into the current DB and historical DB
+    // not used 
     public function setSensorData($JSON, $vehicleNumber)
     {
         
@@ -93,6 +95,7 @@ class VehicleDataModel
             }
     }
     
+    // returns current sensor data
     public function getCurrentSensorData($username)
     {      
         $answer = "";
@@ -120,6 +123,7 @@ class VehicleDataModel
            
     }
     
+    // returns all current sensor data
     public function getAllCurrentSensorData()
     {
         $answer = "";
@@ -147,6 +151,7 @@ class VehicleDataModel
         
     }
     
+    // returns historical sensor data
     public function getHistoricalSensorData($username)
     {
         
@@ -180,6 +185,7 @@ class VehicleDataModel
         
     }
     
+    // returns historical sensor data
     public function getAllHistoricalSensorData()
     {
         
@@ -212,8 +218,8 @@ class VehicleDataModel
         return $data;
         
     }
-          
     
+    // register new vehicle
     public function registerNewVehicle($vehicleNumber)
     {
         $answer = "";
