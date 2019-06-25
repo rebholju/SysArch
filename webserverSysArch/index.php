@@ -8,9 +8,6 @@
 	require_once('src/DataLogic/UserController.php');
 	require_once('src/DataLogic/VehicleDataController.php');
 	
-	//librarys
-	require_once('src/phpMQTT/phpMQTT.php');
-	
 	//View
 	require_once('src/UI/View.php');
 	require_once('src/UI/LoginView.php');
