@@ -72,7 +72,7 @@ class UserDataModel
             
             if(empty($firstname)||empty($lastname)||empty($email)||empty($username)||empty($pwd)||empty($rfidID))
             {
-                $answer .= '<div id="loginfalse">Formular nicht komplett ausgefuellt<br>';
+                $answer .= '<div id="loginfalse">formular is not filled out completly<br>';
                 $error = true;
             }
             else
@@ -81,7 +81,7 @@ class UserDataModel
                 
                 if(!filter_var($email,FILTER_VALIDATE_EMAIL))
                 {
-                    $answer .= '<div id="loginfalse">keine gueltige E-Mail-Adresse angegeben<br>';
+                    $answer .= '<div id="loginfalse">not a valid email<br>';
                 }
                 
                 if(!$error)
@@ -92,7 +92,7 @@ class UserDataModel
                     
                     if($user !== false)
                     {
-                        $answer .= '<div id="loginfalse">Username bereits vergeben !<br>';
+                        $answer .= '<div id="loginfalse">username exists already<br>';
                         $error = true;
                     }
                     
@@ -107,11 +107,11 @@ class UserDataModel
                         
                         if($result)
                         {
-                            $answer .= '<div id="signupsucess">Neuen Benutzer erfolgreich registriert !</a>';
+                            $answer .= '<div id="signupsucess">user signed up successfully</a>';
                         }
                         else
                         {
-                            $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                            $answer .= '<div id="loginfalse">Failure when storing data into database<br>';
                         }
                     }
                 }
@@ -288,7 +288,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             else
             {
                 $Message = MessageHandler::getInstance();
-                $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+                $Message->AddMessage('<div id="loginfalse">Failure when calling role from database<br>');
             }
         }
         
@@ -313,7 +313,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             if(!$result)
             {
                 $Message = MessageHandler::getInstance();
-                $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+                $Message->AddMessage('<div id="loginfalse">Failure when calling userdata from database<br>');
             }
             
             return $userdata;
@@ -339,7 +339,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
         if(!$result)
         {
             $Message = MessageHandler::getInstance();
-            $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+            $Message->AddMessage('<div id="loginfalse">Failure when calling userdata from database<br>');
         }
         
         return $userdata;
@@ -353,7 +353,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
         if(!$result)
         {
             $Message = MessageHandler::getInstance();
-            $Message->AddMessage('<div id="loginfalse">Fehler<br>');
+            $Message->AddMessage('<div id="loginfalse">Failure when deleting Useradta from databaser<br>');
         }
         else
         {
@@ -390,7 +390,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
                 }
                 else
                 {
-                    $answer .= '<div id="loginfalse">Es ist ein Fehler beim Abspeichern passiert !<br>';
+                    $answer .= '<div id="loginfalse">Failure when saving data<br>';
                 }
             }
             else
@@ -409,7 +409,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
         {
             if(!filter_var($email,FILTER_VALIDATE_EMAIL))
             {
-                $answer .= '<div id="loginfalse">keine gueltige E-Mail-Adresse angegeben<br>';
+                $answer .= '<div id="loginfalse">not an valid email-adress<br>';
                 $error = true;
             }
             
@@ -419,7 +419,7 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
                 $result = $statement->execute(array($username, $firstname, $lastname, $email, $rfidID, $userId));
                 if(!$result)
                 {
-                    $answer.='<div id="loginfalse">Failure update data<br>';
+                    $answer.='<div id="loginfalse">Failure when updating data<br>';
                     $error = true;
                 }
                 else
