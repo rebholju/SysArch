@@ -62,10 +62,11 @@ echo'
     <th onclick="sortNumber(0)">Vehicle &#8595&#8593</th>
     <th onclick="sortName(1)">Sensor name &#8595&#8593</th>
     <th onclick="sortNumber(2)">Value &#8595&#8593</th>
-    <th onclick="sortName(3)">Timestamp &#8595&#8593</th>';
+    <th onclick="sortNumber(3)">Unit &#8595&#8593</th>
+    <th onclick="sortName(4)">Timestamp &#8595&#8593</th>';
     if($user->getRole()==10)
     {
-    echo'<th onclick="sortName(4)">Driver &#8595&#8593</th>';
+    echo'<th onclick="sortName(5)">Driver &#8595&#8593</th>';
     }
     echo'
 
@@ -108,6 +109,10 @@ echo'
                 echo'</td><td>';
                 
                 echo $data[$i]['value'];
+                
+                echo '</td><td>';
+                
+                echo $data[$i]['unit'];
                 
                 echo '</td><td>';
                 
