@@ -4,14 +4,14 @@ class UserDataModel
     private $pdo;
   public function __construct()
     {
-//         $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306 dbname=sysarch_w4';
-//         // host=ea-pc165.ei.htwg-konstanz.de;
-//         $dbuser = 'sysarch_w4';
-//         $dbpwd = 'DEF';
+        $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306 dbname=sysarch_w4';
+        // host=ea-pc165.ei.htwg-konstanz.de;
+        $dbuser = 'sysarch_w4';
+        $dbpwd = 'DEF';
 //         //
 //         // Hier Datenbank adresse eintragen auf ea-pc165
-          $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
-//         $this->pdo = new PDO($dsn, $dbuser, $dbpwd);
+//           $this->pdo = new PDO('mysql:host=localhost; dbname=SysArch','root','');
+             $this->pdo = new PDO($dsn, $dbuser, $dbpwd);
     }
     
     public function loginUser($username_email,$password)
