@@ -1,7 +1,13 @@
 <?php
+/**Class that interprets the commands and call the specific functions
+ */
 class CommandInterpreter
 {
-    
+    /** Method that interprets the parameter and 
+     * do a specific action  defined by the parameter
+     * 
+     * @param $command
+     */
     public function analyseCommand($command)
     {
         

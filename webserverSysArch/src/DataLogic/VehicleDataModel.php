@@ -4,7 +4,10 @@ class VehicleDataModel
 {
     private $pdo;
     
-    // creates a connection to the database
+    /** Constructor of the class that initialize a connection
+     * to the DB
+     * 
+     */
     public function __construct()
     {
         $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306; dbname=sysarch_w4';
@@ -17,7 +20,13 @@ class VehicleDataModel
             $this->pdo = new PDO($dsn, $dbuser, $dbpwd);
     }
    
-    // not used 
+    /** Not used anymore. this functionalitiy is done in the Java
+     *  program. The method wirtes the values from the json file into 
+     * the DB
+     * 
+     * @param $JSON
+     * @param $vehicleNumber
+     */
     public function setSensorData($JSON, $vehicleNumber)
     {
         
@@ -95,7 +104,11 @@ class VehicleDataModel
             }
     }
     
-    // returns current sensor data
+    /** Method that returns the data from the DB
+     * 
+     * @param $username
+     * @return mixed[]
+     */
     public function getCurrentSensorData($username)
     {      
         $answer = "";
@@ -123,7 +136,10 @@ class VehicleDataModel
            
     }
     
-    // returns all current sensor data
+    /** Method that returns all data form the DB
+     * 
+     * @return mixed[]
+     */
     public function getAllCurrentSensorData()
     {
         $answer = "";
@@ -151,7 +167,11 @@ class VehicleDataModel
         
     }
     
-    // returns historical sensor data
+    /** Method that returns the historical data from the DBS
+     * 
+     * @param $username
+     * @return mixed[]
+     */
     public function getHistoricalSensorData($username)
     {
         
@@ -185,7 +205,10 @@ class VehicleDataModel
         
     }
     
-    // returns historical sensor data
+    /** Method that returns all historical data from the DB
+     * 
+     * @return mixed[]
+     */
     public function getAllHistoricalSensorData()
     {
         
@@ -219,7 +242,10 @@ class VehicleDataModel
         
     }
     
-    // register new vehicle
+    /** Method that registers a new vehicle in the DB without any sensordata
+     * 
+     * @param $vehicleNumber
+     */
     public function registerNewVehicle($vehicleNumber)
     {
         $answer = "";

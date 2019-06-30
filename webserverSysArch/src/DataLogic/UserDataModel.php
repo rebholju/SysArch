@@ -2,7 +2,11 @@
 class UserDataModel
 {
     private $pdo;
-  public function __construct()
+    
+    /** Constructor of the class UserDataModel. Here is the
+     * DB driver loaded and the connection established.
+     */
+    public function __construct()
     {
         $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306; dbname=sysarch_w4';
         // host=ea-pc165.ei.htwg-konstanz.de;
@@ -14,6 +18,12 @@ class UserDataModel
              $this->pdo = new PDO($dsn, $dbuser, $dbpwd);
     }
     
+    /** Method that compares the the User data with the DB
+     * and sets the session with the username
+     * @param  $username_email 
+     * @param  $password
+     * @return boolean status if the login was sucessfull
+     */
     public function loginUser($username_email,$password)
     {	 
         
@@ -50,6 +60,8 @@ class UserDataModel
         
     }
     
+    /** Unsets the session and save the logout time
+     */
     public function logoutUser()
     {
     if(isset($_GET['command'])=="logout")
@@ -64,6 +76,15 @@ class UserDataModel
     }
     }
     
+    /** Method that writes the inputvalues into the DB 
+     * @param $firstname
+     * @param $lastname
+     * @param $email
+     * @param $username
+     * @param $pwd
+     * @param $rfidID
+     * @return boolean status if the login was sucessfull
+     */
     public function signupUser($firstname,$lastname,$email,$username,$pwd,$rfidID)
     {
         $answer ='';
@@ -127,6 +148,13 @@ class UserDataModel
         return !$error;
     }
         
+    /** Method that resets the password with the input of 
+     * the user
+     * @param $email
+     * @param $resetpwd
+     * @param $newpwd
+     */
+    
     public function resetpwd($email, $resetpwd, $newpwd)
         {    if(isset($_GET['command']))
         {
@@ -192,6 +220,10 @@ class UserDataModel
         }
         }
         
+        /** Method that generates and sends an email with 
+         * the resetpassword to the users email
+         * @param $email
+         */
     public function resetpwdrequest($email)
         {
             
@@ -228,6 +260,12 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             
     }
 
+    /**Method that compares the driver in the JSON file
+     * with the userDB and returns the username.
+     * But not used this is done in the Java programm
+     * @param $JSON
+     * @return mixed|boolean
+     */
     public function authetficateDriver($JSON)
     {
         
@@ -249,33 +287,12 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             return false;         
         }
     }
-    
-    
-    // Hier bearebiten
-    public function logoutDriver()
-    {
-        $data = json_decode($JSON, true);
-        
-        $rfidID = $data['id'];
-        
-        
-        $statement = $this->pdo->prepare("DELETE driver FROM vehiclecurrentdata WHERE rfidID = :rfidID");
-        $result = $statement->execute(array('rfidID' => $rfidID));
-        $user = $statement->fetch();
-        
-        if ($user) {
-            return $user['username'];
-            
-            //JSON File generieren
-            //return $returnJSON
-            
-        } else {
-            return false;
-        }
-    }
-        
-        
-        public function getUserRole($username)
+
+    /**Mehtod that returns the user role 
+     * @param $username
+     * @return mixed
+     */       
+    public function getUserRole($username)
         {
             $statement = $this->pdo->prepare("SELECT role FROM users WHERE username = :username");
             $result = $statement->execute(array('username' => $username));
@@ -291,9 +308,12 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
                 $Message->AddMessage('<div id="loginfalse">Failure when calling role from database<br>');
             }
         }
-        
-        
-        public function getUserData()
+           
+    /**Method that returns all user data
+     * 
+     * @return mixed[]
+     */
+    public function getUserData()
         {
             $counter = 0;
             $userdata = array();
@@ -318,10 +338,12 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
             
             return $userdata;
         }
-        
-    
-    
 
+    /**Method that returns only the userdata from the specific user
+    * 
+    * @param $username
+    * @return mixed[]
+    */
     public function getOwnUserData($username)
     {
         $counter = 0;
@@ -345,6 +367,10 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
         return $userdata;
     }
     
+    /**Method that deletes the user from the DB
+     * 
+     * @param $userId
+     */
     public function deleteUserfromDatabase($userId)
     {
         $statement = $this->pdo->prepare("DELETE FROM users WHERE idUsers = ?");
@@ -363,7 +389,17 @@ go to this link: http://localhost/SysArch/webserverSysArch/index.php?command=res
         
     }
     
-    
+    /** Method that changes user data to the given parameters
+     * 
+     * @param $firstname
+     * @param $lastname
+     * @param $email
+     * @param $username
+     * @param $oldpwd
+     * @param $newpwd
+     * @param $rfidID
+     * @param $userId
+     */
     public function editUserinDatabase($firstname, $lastname, $email, $username, $oldpwd, $newpwd, $rfidID, $userId)
     {
         $answer ='';

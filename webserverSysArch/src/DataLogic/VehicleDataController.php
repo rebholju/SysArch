@@ -3,12 +3,20 @@ class VehicleDataController
 {
     private $refVehicleDataModel;
     
-    public function __construct()
-    {
+        /** Constructor of the class that generates an instance
+         * of the VehicleDataModel class
+         * 
+         */
+        public function __construct()
+         {
         $this->refVehicleDataModel = new VehicleDataModel();
-    }
+         }
     
-        // returns current Data
+        /** Method that returns the current sensor data by 
+         * calling a method from the VehicleDataModel class
+         * 
+         * @return mixed[]
+         */
         public function getCurrentData()
         {
             $username = $_SESSION['username'];
@@ -26,7 +34,11 @@ class VehicleDataController
             }
         }
         
-        //returns historical Data
+        /** Method that returns the current sensor data by 
+         * calling a method from the VehicleDataModel class
+         * 
+         * @return mixed[]
+         */
         public function getHistoricalData()
         {       
             $username = $_SESSION['username'];
@@ -44,7 +56,12 @@ class VehicleDataController
             }
         }
 
-        // not used 
+        /** Not used anymore. this functionalitiy is done in the Java
+         * program. The method wirtes the values from the json file into 
+         * the DB
+         * 
+         * @param  $MQTT
+         */
         public function setVehicleData($MQTT)
         {
             //vehiclenumber kommt von Mqttprotokoll
@@ -54,7 +71,9 @@ class VehicleDataController
             $this->refVehicleDataModel->setSensorData($MQTT, $vehicleNumber);
         }
         
-        // registers new vehicle 
+        /** Method that generates a new vehicle without any sensordata
+         * 
+         */ 
         public function newVehicle()
         {
             $vehicleNumber = $_POST['vehicleNumber'];

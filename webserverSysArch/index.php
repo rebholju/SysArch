@@ -19,12 +19,7 @@
 	require_once('src/UI/ActualDataView.php');
 	require_once('src/UI/OptionsView.php');
 	require_once('src/UI/EditUserView.php');
-	
-	
-//  	$refcontorller = new VehicleDataController();
-//  	$refcontorller->setVehicleData("test");
-	
-	
+
 	main();
 	
 	function main()
@@ -42,7 +37,7 @@
 	    }
 	    else
 	    {
-	        // also die app setzen auf HANS
+	        
 	        $_SESSION['softwareName'] = 'SysArchWeb';
 	    }
 

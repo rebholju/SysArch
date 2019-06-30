@@ -1,13 +1,25 @@
 <?php
+/**Class that handles the connection between the view and 
+ * the database
+ *
+ */
 	class UserController
 	{
 	   private $refCurrentUserDataModel;
 	   
-	   public function __construct()
+	   /** Constructor of the class. The constructor generates
+	    * a instance of the UserDataModel
+	    */
+	    public function __construct()
 	   {
 	       $this->refCurrentUserDataModel = new UserDataModel();
 	   }
-	    //Function to login User
+
+	   /** Method that gets the Userinput and calls the login
+	    * method of the UserDataModel class
+	    * 
+	    * @return boolean
+	    */
         public function login() 
         {
 
@@ -34,14 +46,20 @@
 
         }
         
+        /** Method that calls the logout method of the
+         * UserDataModel class
+         * 
+         */
         public function UserLogout()
         {
-            $pdo = new UserDataModel();
-            $pdo->logoutUser();
+            $this->refCurrentUserDataModel->logoutUser();
         }
         
-        
-        //signup
+        /** Method that gets the userinput and calls the singup
+         * method of the USerDataModel class
+         * 
+         * @return boolean
+         */
         public function Signup()
         {
             $firstname = $_POST['firstname'];
@@ -56,7 +74,11 @@
            return $success;
         }
         
-        //get Role
+        /**Method that gets the username from the session and calls the getRole
+         * mehtod of the UserDataModel class
+         * 
+         * @return mixed
+         */
         public function getRole()
         {
             $username = $_SESSION['username'];
@@ -64,8 +86,10 @@
             return $role;
         }
         
-        
-        //get Userdata
+        /** Method that returns all Userdata
+         * 
+         * @return mixed[]
+         */
         public function getAllUserData()
         {
             $refUserController = new UserController();
@@ -84,12 +108,18 @@
             }
         }
         
+        /** Method that calls the resetpwd
+         * method of the UserDataModel class
+         */
         public function resetpasswordrequest()
         {
             $email = $_POST['email'];
             $this->refCurrentUserDataModel->resetpwdrequest($email);
         }
         
+        /** Method that gets the user input and  calls the resetpwd
+         * method of the UserDataModel class 
+         */
         public function resetpasswordbyEmail()
         {
              $email = $_POST['email'];
@@ -98,6 +128,9 @@
             $this->refCurrentUserDataModel->resetpwd($email, $resetpwd, $newpwd);
         }
         
+        /** Method that gets the user id and deletes this user
+         * 
+         */
         public function deleteUser()
         {
             $userId= $_GET['number'];
@@ -105,6 +138,9 @@
             
         }
         
+        /** Method that gets the user id and edits this userdata
+         *
+         */
         public function editUser()
         {
             $firstname = $_POST['firstname'];
@@ -118,6 +154,5 @@
             
             $this->refCurrentUserDataModel->editUserinDatabase($firstname, $lastname, $email, $username, $oldpwd, $newpwd, $rfidID, $userId);
         }
-        
 
     }
