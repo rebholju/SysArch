@@ -90,6 +90,12 @@ class CommandInterpreter
             $view->generatePage();
             
         }
+        elseif($command == "Lidar")
+        {
+            $view = new Lidar();
+            $view->generatePage();
+            
+        }
     }
     
 }

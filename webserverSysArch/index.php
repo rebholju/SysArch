@@ -19,6 +19,7 @@
 	require_once('src/UI/ActualDataView.php');
 	require_once('src/UI/OptionsView.php');
 	require_once('src/UI/EditUserView.php');
+	require_once('src/UI/Lidar.php');
 
 	main();
 	

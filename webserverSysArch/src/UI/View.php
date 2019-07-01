@@ -18,9 +18,13 @@ abstract class View
         echo'	<!DOCTYPE html>
                 <html lang="de">
                 <head>
+                <meta charset="utf-8">
+	            <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	            <meta name="viewport" content="width=device-width, initial-scale=1">
                 <title>SysArch</title>
                 <link href="src/UI/stylesheet.css" rel="stylesheet">
-       
+	            <script src="src/UI/Chart.js"></script>
+	            <script src="src/UI/utils.js"></script>
                 </head>
             	<div id="head">
                 <a id="title">System Architecture Webserver</a>';

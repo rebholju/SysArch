@@ -9,7 +9,12 @@ class ActualDataView extends View
         
         $user = new UserController();
  
-       
+echo'</div><br></br><br></br>
+     <div id="login">      
+     <div class="dropdown">
+     <button class="dropbtn">Select a diagram!</button>
+     <div class="dropdown-content">
+     <a href="index.php?command=Lidar">Lidar</a></div></div></div>';       
 
 echo'
 <table id="ActualDataTable">
