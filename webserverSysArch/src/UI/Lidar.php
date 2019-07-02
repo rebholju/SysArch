@@ -14,7 +14,6 @@ class Lidar extends View
         {
             if($data[$i]['sensor'] == "lidarDistances") {
                 $this->$lidarstring = $data[$i]['value'];
-                echo $lidarstring;
                 break;
             }
         }
@@ -24,7 +23,6 @@ class Lidar extends View
         {
             $j = 0;
             $lidarvalues[$j] = $lidararray[$i];
-            echo $lidararray[$j];
             $j++;
         }
   

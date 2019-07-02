@@ -8,7 +8,8 @@ class UserDataModel
      */
     public function __construct()
     {
-        $dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306; dbname=sysarch_w4';
+        //$dsn = 'mysql:host=ea-pc165.ei.htwg-konstanz.de; port=3306; dbname=sysarch_w4';
+        $dsn = 'mysql:host=localhost; port=3307; dbname=sysarch_w4';
         // host=ea-pc165.ei.htwg-konstanz.de;
         $dbuser = 'sysarch_w4';
         $dbpwd = 'DEF';
