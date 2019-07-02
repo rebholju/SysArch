@@ -41,18 +41,35 @@ for($i=0;$i<sizeof($data);$i++)
     echo $data[$i]['vehicleNumber'];
 
     echo'</td><td>';
-
-    echo $data[$i]['sensor'];
-
-    echo'</td><td>';
-
-    echo $data[$i]['value'];
-
-    echo '</td><td>';
     
-    echo $data[$i]['unit'];
+    if(strcmp($data[$i]['sensor'], "LidarDistances") == 0) {
+        $lidararray = explode(", ",$data[$i]['value']);
+        echo $data[$i]['sensor'];
+
+        echo'</td><td>';
     
-    echo '</td><td>';
+        echo $lidararray[0];
+
+        echo '</td><td>';
+        
+        echo ''. $data[$i]['unit'] .' at 0 &deg;';
+        
+        echo '</td><td>';
+    }
+    else {
+        echo $data[$i]['sensor'];
+        
+        echo'</td><td>';
+        
+        echo $data[$i]['value'];
+        
+        echo '</td><td>';
+        
+        echo $data[$i]['unit'];
+        
+        echo '</td><td>';
+    }
+    
 
     echo $data[$i]['timeStamp'];
     
