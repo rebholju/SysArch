@@ -14,17 +14,19 @@ class Lidar extends View
         {
             if(strcmp($data[$i]['sensor'], "LidarDistances") == 0) {
                 $lidararray = explode(";",$data[$i]['value']);
-                for($j=0;$j<=36;$j++)
+                for($j=0;$j<36;$j++)
                 {
                     if($j==0) {$k=0;}
                     if($k==10) {$k-=1;}
                         $lidarvalues[$j] = $lidararray[$k];
                         $k+=10;
                 }
-                
+
                 break;
             }
         }
+        
+        
                 
         
         /*$lidararray = explode(", ", $lidarstring);
