@@ -6,24 +6,26 @@ class Lidar extends View
     {
         $refVehicleDataController = new VehicleDataController();
         $data = $refVehicleDataController->getCurrentData();
-        //$lidarstring;
+        //$lidararray = array();
         $lidarvalues = array();
         $user = new UserController();
 
         for($i=0;$i<sizeof($data);$i++)
         {
             if(strcmp($data[$i]['sensor'], "LidarDistances") == 0) {
-                $lidararray = explode(", ",$data[$i]['value']);
-                /* TODO: Simikolon anpassen + auswahl 36 Werte
-                 * for($i=0;$i<sizeof($lidararray);$i+10)
+                $lidararray = explode(";",$data[$i]['value']);
+                for($j=0;$j<=36;$j++)
                 {
-                    $j = 0;
-                    $lidarvalues[$j] = $lidararray[$i];
-                    $j++;
-                }*/
+                    if($j==0) {$k=0;}
+                    if($k==10) {$k-=1;}
+                        $lidarvalues[$j] = $lidararray[$k];
+                        $k+=10;
+                }
+                
                 break;
             }
         }
+                
         
         /*$lidararray = explode(", ", $lidarstring);
         
@@ -42,17 +44,17 @@ echo'
 	<div class="content">
 		<div class="wrapper"><canvas id="chart-0"></canvas></div>
 		<div class="toolbar">
-			<button onclick="randomize(this)">Randomize</button>
-			<button onclick="addDataset(this)">Add Dataset</button>
+			<button onclick="updateDataset(this)">Update Dataset</button>
+			<button onclick="addDataset(this)">Add dummy Dataset</button>
 			<button onclick="removeDataset(this)">Remove Dataset</button>
 		</div>
 	</div>';
 
 ?>            
 <script type="text/javascript">
-        var lidardata=<?php echo json_encode($lidararray); ?>;	// bei 36 Werten Variable ändern
+        var lidardata=<?php echo json_encode($lidarvalues); ?>;	
 
-    	var DATA_COUNT = 7;
+    	var DATA_COUNT = 36;
 
 		var utils = Samples.utils;
 
@@ -70,11 +72,15 @@ echo'
 
 		function adjustRadiusBasedOnData(ctx) {
 			var v = ctx.dataset.data[ctx.dataIndex];
-			return v < 10 ? 5
-				: v < 25 ? 7
-				: v < 50 ? 9
-				: v < 75 ? 11
-				: 15;
+			return v < 50 ? 2
+				: v < 200 ? 3
+				: v < 500 ? 4
+				: v < 1000 ? 5
+				: v < 2000 ? 6
+				: v < 3000 ? 7
+				: v < 4000 ? 8
+				: v < 5000 ? 9
+				: 10;
 		}
 
 		function generateData() {
@@ -90,8 +96,8 @@ echo'
 			datasets: [{
 				data: lidardata,          
 				label: 'Vehicle 1 Lidar Sensor [radius-axis: mm | degree-axis: grad]',
-                backgroundColor: Chart.helpers.color('#4dc9f6').alpha(0.2).rgbString(),
-				borderColor: '#4dc9f6',
+                backgroundColor: Chart.helpers.color('#537bc4').alpha(0.2).rgbString(),
+				borderColor: '#537bc4',
 			}]
 		};
 
@@ -138,10 +144,9 @@ echo'
 		}
 
 		// eslint-disable-next-line no-unused-vars
-		function randomize() {
-			chart.data.datasets.forEach(function(dataset) {
-				dataset.data = generateData();
-			});
+		function updateDataset() {
+			dataset.data = lidardata;
+			
 			chart.update();
 		}
 

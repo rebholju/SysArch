@@ -43,7 +43,7 @@ for($i=0;$i<sizeof($data);$i++)
     echo'</td><td>';
     
     if(strcmp($data[$i]['sensor'], "LidarDistances") == 0) {
-        $lidararray = explode(", ",$data[$i]['value']);
+        $lidararray = explode(";",$data[$i]['value']);
         echo $data[$i]['sensor'];
 
         echo'</td><td>';
@@ -53,6 +53,20 @@ for($i=0;$i<sizeof($data);$i++)
         echo '</td><td>';
         
         echo ''. $data[$i]['unit'] .' at 0 &deg;';
+        
+        echo '</td><td>';
+    }
+    else if( (strcmp($data[$i]['sensor'], "Acceleration") || strcmp($data[$i]['sensor'], "Gyro")) == 0) {
+        $valuearray = explode(",",$data[$i]['value']);
+        echo $data[$i]['sensor'];
+        
+        echo'</td><td>';
+        
+        echo $valuearray[0] .'<br>'. $valuearray[1] .'<br>'. $valuearray[2];
+        
+        echo '</td><td>';
+        
+        echo '[x]<br>[y] '. $data[$i]['unit'] .'<br>[z]';
         
         echo '</td><td>';
     }
