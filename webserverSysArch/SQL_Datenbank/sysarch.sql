@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 26. Jun 2019 um 14:43
--- Server-Version: 10.1.31-MariaDB
--- PHP-Version: 7.1.15
+-- Erstellungszeit: 03. Jul 2019 um 13:18
+-- Server-Version: 10.1.38-MariaDB
+-- PHP-Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,18 +38,19 @@ CREATE TABLE `users` (
   `password` longtext NOT NULL,
   `lastlogin` datetime NOT NULL,
   `resetpassword` longtext NOT NULL,
-  `rfidID` int(11) NOT NULL
+  `rfidID` varchar(20) NOT NULL,
+  `vehicle` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`idUsers`, `role`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`, `rfidID`) VALUES
-(1, 10, 'Admin', 'Admin', 'Admin', 'anpeju@googlemail.com', '$2y$10$rPgGdVdsJHkh9fzwmq9ixebz59qArpFnwtBmDs.7DcaU9eD7ZSVuW', '2019-06-26 14:33:37', '', 973453),
-(23, 20, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$VkbQUXhfyTPKY1bYLF9UQ.VahZkg0fwDEk.5GwwE1kVlMnSVcrH1a', '2019-06-26 14:33:47', '', 123456),
-(24, 20, 'pe721sch', 'Peter', 'Schmidt', 'petersch1994@gmail.com', '$2y$10$k5jgB6Eu77A6hO5r8GU4Q.5.AnLIoPpcuXaeAb3sRyqhx/hG1YX26', '0000-00-00 00:00:00', '', 111111),
-(25, 20, 'an721rot', 'Andreas', 'Roth', 'an721rot@htwg-konstanz.de', '$2y$10$4bfCn8IjqFxEH0e4oj7ZduvxyiR0IgosgtgqnVd0glhjed0sftrhG', '0000-00-00 00:00:00', '', 12345);
+INSERT INTO `users` (`idUsers`, `role`, `username`, `firstname`, `lastname`, `email`, `password`, `lastlogin`, `resetpassword`, `rfidID`, `vehicle`) VALUES
+(1, 10, 'Admin', 'Admin', 'Admin', 'anpeju@googlemail.com', '$2y$10$rPgGdVdsJHkh9fzwmq9ixebz59qArpFnwtBmDs.7DcaU9eD7ZSVuW', '2019-06-26 14:33:37', '', '973453', 0),
+(23, 20, 'rebholju', 'Julian', 'Rebholz', 'rebholju@googlemail.com', '$2y$10$VkbQUXhfyTPKY1bYLF9UQ.VahZkg0fwDEk.5GwwE1kVlMnSVcrH1a', '2019-06-26 14:33:47', '', '123456', 0),
+(24, 20, 'pe721sch', 'Peter', 'Schmidt', 'petersch1994@gmail.com', '$2y$10$k5jgB6Eu77A6hO5r8GU4Q.5.AnLIoPpcuXaeAb3sRyqhx/hG1YX26', '0000-00-00 00:00:00', '', '111111', 0),
+(25, 20, 'an721rot', 'Andreas', 'Roth', 'an721rot@htwg-konstanz.de', '$2y$10$4bfCn8IjqFxEH0e4oj7ZduvxyiR0IgosgtgqnVd0glhjed0sftrhG', '0000-00-00 00:00:00', '', '12345', 0);
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE `vehiclecurrentdata` (
   `id` int(11) NOT NULL,
   `vehicleNumber` int(11) NOT NULL,
   `sensor` tinytext NOT NULL,
-  `value` varchar(20) DEFAULT NULL,
+  `value` varchar(1160) DEFAULT NULL,
   `unit` tinytext NOT NULL,
   `timeStamp` datetime DEFAULT NULL,
   `driver` tinytext
@@ -87,7 +88,7 @@ CREATE TABLE `vehiclehistoricaldata` (
   `id` int(11) NOT NULL,
   `vehicleNumber` int(11) NOT NULL,
   `sensor` tinytext NOT NULL,
-  `value` float NOT NULL,
+  `value` varchar(1160) NOT NULL,
   `unit` tinytext NOT NULL,
   `timeStamp` datetime NOT NULL,
   `driver` tinytext NOT NULL
@@ -98,18 +99,18 @@ CREATE TABLE `vehiclehistoricaldata` (
 --
 
 INSERT INTO `vehiclehistoricaldata` (`id`, `vehicleNumber`, `sensor`, `value`, `unit`, `timeStamp`, `driver`) VALUES
-(1, 1, 'Temperature', 10, 'Degree Celsius', '2019-06-12 18:05:48', 'pe721sch'),
-(2, 1, 'Humidity', 8, '%', '2019-06-12 18:05:48', 'pe721sch'),
-(3, 1, 'Speed', 50, 'km/h', '2019-06-12 18:05:48', 'pe721sch'),
-(4, 1, 'LidarDistances', 190, 'mm', '2019-06-12 18:05:48', 'pe721sch'),
-(5, 1, 'Temperature', 10, 'Degree Celsius', '2019-06-14 18:05:48', 'pe721sch'),
-(6, 1, 'Humidity', 8, '%', '2019-06-14 18:05:48', 'pe721sch'),
-(7, 1, 'Speed', 50, 'km/h', '2019-06-14 18:05:48', 'pe721sch'),
-(8, 1, 'LidarDistances', 190, 'mm', '2019-06-14 18:05:48', 'pe721sch'),
-(9, 1, 'Temperature', 10, 'Degree Celsius', '2019-06-13 18:05:48', 'pe721sch'),
-(10, 1, 'Humidity', 8, '%', '2019-06-13 18:05:48', 'pe721sch'),
-(11, 1, 'Speed', 50, 'km/h', '2019-06-13 18:05:48', 'pe721sch'),
-(12, 1, 'LidarDistances', 190, 'mm', '2019-06-13 18:05:48', 'pe721sch');
+(1, 1, 'Temperature', '10', 'Degree Celsius', '2019-06-12 18:05:48', 'pe721sch'),
+(2, 1, 'Humidity', '8', '%', '2019-06-12 18:05:48', 'pe721sch'),
+(3, 1, 'Speed', '50', 'km/h', '2019-06-12 18:05:48', 'pe721sch'),
+(4, 1, 'LidarDistances', '190', 'mm', '2019-06-12 18:05:48', 'pe721sch'),
+(5, 1, 'Temperature', '10', 'Degree Celsius', '2019-06-14 18:05:48', 'pe721sch'),
+(6, 1, 'Humidity', '8', '%', '2019-06-14 18:05:48', 'pe721sch'),
+(7, 1, 'Speed', '50', 'km/h', '2019-06-14 18:05:48', 'pe721sch'),
+(8, 1, 'LidarDistances', '190', 'mm', '2019-06-14 18:05:48', 'pe721sch'),
+(9, 1, 'Temperature', '10', 'Degree Celsius', '2019-06-13 18:05:48', 'pe721sch'),
+(10, 1, 'Humidity', '8', '%', '2019-06-13 18:05:48', 'pe721sch'),
+(11, 1, 'Speed', '50', 'km/h', '2019-06-13 18:05:48', 'pe721sch'),
+(12, 1, 'LidarDistances', '190', 'mm', '2019-06-13 18:05:48', 'pe721sch');
 
 --
 -- Indizes der exportierten Tabellen
@@ -147,13 +148,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `vehiclecurrentdata`
 --
 ALTER TABLE `vehiclecurrentdata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `vehiclehistoricaldata`
 --
 ALTER TABLE `vehiclehistoricaldata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
